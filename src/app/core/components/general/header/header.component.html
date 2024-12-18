@@ -1,0 +1,99 @@
+<!-- Offcanvas Menu Begin -->
+<div class="offcanvas-menu-overlay" [ngClass]="{'active': isOffcanvasOpen}" (click)="toggleOffcanvasMenu()"></div>
+
+<div class="offcanvas-menu-wrapper" [ngClass]="{'active': isOffcanvasOpen}">
+    <!-- Close Button -->
+    <div class="offcanvas__close" (click)="toggleOffcanvasMenu()">+</div>
+    
+    <!-- Logo Section (moved to the top) -->
+    <div class="offcanvas__logo">
+        <a style="cursor: pointer;" (click)="GoToHome();"><img src="assets/img/logo.png" alt="Logo"></a>
+    </div>
+    
+    <!-- Offcanvas Widgets (Text Instead of Icons) -->
+    <ul class="offcanvas__widget">
+        @if(categories.length>0){
+            <li [ngClass]="{'active': activeMenuItem === 'home'}">
+                <a (click)="GoToHome();">Home</a>
+            </li>}
+            @for(category of categories ; track category.categoryId){
+                <li [ngClass]="{'active': activeMenuItem == category.categoryName}">
+                    <a (click)="GetCategoryProducts(category.categoryName)">{{category.categoryName}}</a>
+                </li>
+            }
+            @if(categories.length>0){
+
+            <li [ngClass]="{'active': activeMenuItem === 'contact'}">
+              <a (click)="GoToContact();">Contact</a>
+            </li>}
+        <li><a (click)="GoToSearchComponent()">Search</a></li>
+        <li><a (click)="GoToWishlist()">Wishlist</a></li>
+        <li><a (click)="GoToCart()">Cart</a></li>
+    </ul>
+    
+    <!-- Mobile Menu Section (You can populate this dynamically) -->
+</div>
+<!-- Offcanvas Menu End -->
+@if(cartlistCount>0 && !isCartComponent){
+<div class="circle-indicator" (click)="GoToCart();">
+    <a ><span class="icon_bag_alt"></span>
+        <div class="fixed-tip">{{cartlistCount}}</div>
+    </a>
+
+</div>
+}
+    <!-- Offcanvas Menu End -->
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between">
+                <div class="canvas__open" (click)="toggleOffcanvasMenu()">
+                    <i class="fa fa-bars" ></i>
+                </div>
+
+                <div class="header__logo col-5 col-lg-1 text-right text-lg-left">
+            
+                        <a style="cursor: pointer;" (click)="GoToHome();"><img src="assets/img/logo.png" alt=""></a>
+                </div>
+                
+                <div>
+                    <nav class="header__menu text-center">
+                        <ul>
+                            @if(categories.length>0){
+                            <li [ngClass]="{'active': activeMenuItem === 'home'}">
+                                <a (click)="GoToHome();">Home</a>
+                            </li>}
+                            @for(category of categories ; track category.categoryId){
+                                <li [ngClass]="{'active': activeMenuItem == category.categoryName}">
+                                    <a (click)="GetCategoryProducts(category.categoryName)">{{category.categoryName}}</a>
+                                </li>
+                            }
+                            @if(categories.length>0){
+
+                            <li [ngClass]="{'active': activeMenuItem === 'contact'}">
+                              <a (click)="GoToContact();">Contact</a>
+                            </li>}
+                        </ul>              
+                    </nav>
+                </div>
+
+                    <div class="header__right wedgit-wrapper">
+                        <div class="header__right__auth">
+                        </div>
+                        <ul class="header__right__widget">
+                            <li (click)="GoToSearchComponent()" class="search-switch d-none d-lg-inline-block"><span class="icon_search "></span></li>
+                            <li><a (click)="GoToWishlist();"><span class="icon_heart_alt"></span>
+                                <div class="tip">{{wishlistCount}}</div>
+                            </a></li>
+                            <li><a (click)="GoToCart();"><span class="icon_bag_alt"></span>
+                                <div class="tip">{{cartlistCount}}</div>
+                            </a></li>
+                        </ul>
+                    </div>
+            </div>
+
+        </div>
+    </header>
+    <!-- Header Section End -->
+

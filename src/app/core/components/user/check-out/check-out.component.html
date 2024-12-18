@@ -1,0 +1,210 @@
+@if(isLoading){
+	<div id="logo-spinner" class="bg-white position-fixed show translate-middle vw-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <img id="logo" src="assets/img/logo.png" alt="Loading..." class="logo" />
+    </div>
+ }
+<!-- Breadcrumb Begin -->
+<div class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__links">
+                    <a style="cursor: pointer;" (click)="GoToHome();"><i class="fa fa-home"></i> Home</a>
+                    <span>Check Out</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
+<!-- Checkout Section Begin -->
+<section class="checkout spad">
+    <div class="container">
+        <div class="row">
+
+        </div>
+        <form #checkoutform="ngForm" (ngSubmit)="onSubmit($event,checkoutform)" class="checkout__form">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h5>Billing detail</h5>
+                    <div class="row">
+
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="checkout__form__input">
+                                <p>First Name <span>*</span></p>
+                                <input type="text" name="firstname" [(ngModel)]="User.FirstName" #firstname="ngModel"
+                                    required pattern="[a-zA-Z\u0600-\u06FF]+" maxlength="20" minlength="3">
+                            </div>
+                            @if(firstname.errors?.['required'] && (firstname.touched || checkoutform.submitted)){
+                            <span class="error-message">First name is required</span>
+                            }
+                            @if(firstname.errors?.['minlength'] && (firstname.touched || checkoutform.submitted)){
+                            <span class="error-message">First name minimum length is 3 letters</span>
+                            }
+                            @if(firstname.errors?.['maxlength'] && (firstname.touched || checkoutform.submitted)){
+                            <span class="error-message">First name maximum length is 20 letters</span>
+                            }
+                            @if(firstname.errors?.['pattern'] && (firstname.touched || checkoutform.submitted)){
+                            <span class="error-message">First name must contain only English or Arabic alphabetic
+                                characters</span>
+                            }
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="checkout__form__input">
+                                <p>Last Name <span>*</span></p>
+                                <input type="text" name="lastname" [(ngModel)]="User.LastName" #lastname="ngModel"
+                                    required pattern="[a-zA-Z\u0600-\u06FF]+" maxlength="12" minlength="3">
+                            </div>
+                            @if(lastname.errors?.['required'] && (lastname.touched || checkoutform.submitted)){
+                            <span class="error-message">Last name is required</span>
+                            }
+                            @if(lastname.errors?.['minlength'] && (lastname.touched || checkoutform.submitted)){
+                            <span class="error-message">Last name minimum length is 3 letters</span>
+                            }
+                            @if(lastname.errors?.['maxlength'] && (lastname.touched || checkoutform.submitted)){
+                            <span class="error-message">Last name maximum length is 12 letters</span>
+                            }
+                            @if(lastname.errors?.['pattern'] && (lastname.touched || checkoutform.submitted)){
+                            <span class="error-message">Last name must contain only English or Arabic alphabetic
+                                characters</span>
+                            }
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="checkout__form__input">
+                                <p>Town/City <span>*</span></p>
+                                <input type="text" name="city" [(ngModel)]="User.City" #city="ngModel" required
+                                    pattern="[a-zA-Z\u0600-\u06FF]+" maxlength="12" minlength="3">
+                                @if(city.errors?.['required'] && (city.touched || checkoutform.submitted)){
+                                <span class="error-message">Town/City is required</span>
+                                }
+                                @if(city.errors?.['minlength'] && (city.touched || checkoutform.submitted)){
+                                <span class="error-message">Town/City minimum length is 3 letters</span>
+                                }
+                                @if(city.errors?.['maxlength'] && (city.touched || checkoutform.submitted)){
+                                <span class="error-message">Town/City maximum length is 12 letters</span>
+                                }
+                                @if(city.errors?.['pattern'] && (city.touched || checkoutform.submitted)){
+                                <span class="error-message">Town/City must contain only English or Arabic alphabetic
+                                    characters</span>
+                                }
+                            </div>
+
+                            <div class="checkout__form__input">
+                                <p>Address <span>*</span></p>
+                                <input type="text" placeholder="Street Address" name="streetaddress"
+                                    [(ngModel)]="User.StreetAddress" #streetaddress="ngModel" required
+                                    pattern="[a-zA-Z0-9\u0600-\u06FF\s]+" maxlength="40" minlength="3">
+                                @if(streetaddress.errors?.['required'] && (streetaddress.touched ||
+                                checkoutform.submitted)){
+                                <span class="error-message">Street Address is required</span>
+                                }
+                                @if(streetaddress.errors?.['minlength'] && (streetaddress.touched ||
+                                checkoutform.submitted)){
+                                <span class="error-message">Street Address minimum length is 3 letters</span>
+                                }
+                                @if(streetaddress.errors?.['maxlength'] && (streetaddress.touched ||
+                                checkoutform.submitted)){
+                                <span class="error-message">Street Address maximum length is 40 letters</span>
+                                }
+                                @if(streetaddress.errors?.['pattern'] && (streetaddress.touched ||
+                                checkoutform.submitted)){
+                                <span class="error-message">Appartment must contain only English or Arabic
+                                    alphabetic characters</span>
+                                }
+                                <input type="text" placeholder="Apartment. suite, unite ect ( optinal )" name="appartment"
+                                [(ngModel)]="User.Appartment" #appartment="ngModel" pattern="[a-zA-Z0-9\u0600-\u06FF\s]+" maxlength="20" minlength="3">
+                                @if(appartment.errors?.['minlength'] && (appartment.touched || checkoutform.submitted)){
+                                <span class="error-message">Appartment minimum length is 3 letters</span>
+                                }
+                                @if(appartment.errors?.['maxlength'] && (appartment.touched || checkoutform.submitted)){
+                                <span class="error-message">Appartment maximum length is 20 letters</span>
+                                }
+                                @if(appartment.errors?.['pattern'] && (appartment.touched || checkoutform.submitted)){
+                                <span class="error-message">Appartment must contain only English or Arabic alphabetic characters</span>
+                                }
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="checkout__form__input">
+                                <p>Phone <span>*</span></p>
+                                <input type="text" name="phonenumber" [(ngModel)]="User.PhoneNumber"
+                                    #phonenumber="ngModel" required pattern="^(011|010|015|012)\d{8}$">
+                            </div>
+                            @if(phonenumber.errors?.['required'] && (phonenumber.touched || checkoutform.submitted)){
+                            <span class="error-message">Phone Number is required</span>
+                            }
+                            @if(phonenumber.errors?.['pattern'] && (phonenumber.touched || checkoutform.submitted)){
+                            <span class="error-message">Please enter a valid Phone Number</span>
+                            }
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="checkout__form__input">
+                                <p>Email <span>*</span></p>
+                                <input type="text" name="email" [(ngModel)]="User.Email" #email="ngModel" required
+                                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+                            </div>
+                            @if(email.errors?.['required'] && (email.touched || checkoutform.submitted)){
+                            <span class="error-message">Email is required</span>
+                            }
+                            @if(email.errors?.['pattern'] && (email.touched || checkoutform.submitted)){
+                            <span class="error-message">Please enter a valid email</span>
+                            }
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="checkout__form__checkbox">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="checkout__order">
+                        <h5>Your order</h5>
+                        <div class="checkout__order__total">
+                            <ul>
+                                @if(MainTotal.Sub != MainTotal.Tot){
+                                    <li>Subtotal <span class="Discount">{{MainTotal.Sub | egpCurrency}}</span></li>
+                                }
+                                <li>Total <span style="color: black;">{{MainTotal.Tot | egpCurrency}}</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="checkout__order__widget">
+                            <label for="check-payment">
+                                Pay on delivery
+                                <input type="checkbox" id="check-payment" name="payondelivery"
+                                    [checked]="User.PaymentMethod === 0"
+                                    (change)="selectPaymentMethod(0, $event)">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="OnlinePayment">
+                                Online Payment
+                                <input type="checkbox" id="OnlinePayment" name="payOnlinePayment"
+                                    [checked]="User.PaymentMethod === 1"
+                                    (change)="selectPaymentMethod(1, $event)">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+
+
+                        <div class="error-message mb-3">
+                            @if(User.PaymentMethod == -1 && checkoutform.submitted){
+                            <span>Please choose a payment method</span>
+                            }
+                        </div>
+
+                        <button type="submit" class="site-btn">Place order</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<!-- Checkout Section End -->

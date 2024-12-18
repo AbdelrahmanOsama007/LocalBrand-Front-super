@@ -1,0 +1,30 @@
+a {
+    cursor: pointer;
+}
+.women-fashion{
+	background-image: url('/assets/img/categories/category-1.jpg') !important;
+}
+.instaimage1{
+    background-image: url('/assets/img/instagram/insta-1.jpg') !important;
+    cursor: pointer;
+}
+.instaimage2{
+    background-image: url('/assets/img/instagram/insta-2.jpg') !important;
+    cursor: pointer;
+}
+.instaimage3{
+    background-image: url('/assets/img/instagram/insta-3.jpg') !important;
+    cursor: pointer;
+}
+.instaimage4{
+    background-image: url('/assets/img/instagram/insta-4.jpg') !important;
+    cursor: pointer;
+}
+.instaimage5{
+    background-image: url('/assets/img/instagram/insta-5.jpg') !important;
+    cursor: pointer;
+}
+.instaimage6{
+    background-image: url('/assets/img/instagram/insta-6.jpg') !important;
+    cursor: pointer;
+}

@@ -1,0 +1,328 @@
+<div class="container mt-4">
+  <h2 class="mb-4 text-center">Processing Orders</h2>
+  <div class="table-responsive">
+    <table class="table table-hover table-striped table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th><i class="fas fa-hashtag"></i> Order Number</th>
+          <th><i class="fas fa-calendar-alt"></i> Order Date</th>
+          <th><i class="fas fa-user"></i> Customer Name</th>
+          <th><i class="fas fa-dollar-sign"></i> Total</th>
+          <th><i class="fas fa-tasks"></i> Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of processingOrders" class="align-middle">
+          <td>{{ order.orderNumber }}</td>
+          <td>{{ order.orderDate | date : "mediumDate" }}</td>
+          <td>{{ order.firstName }} {{ order.lastName }}</td>
+          <td>${{ order.total | number : "1.2-2" }}</td>
+          <td>
+            <span class="badge badge-warning">
+              <i class="fas fa-spinner"></i> Processing
+            </span>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-info me-2" (click)="viewOrder(order)">
+              <i class="fas fa-eye"></i> View
+            </button>
+            <button
+              class="btn btn-sm btn-success me-2"
+              (click)="openUpdateModal(order)"
+            >
+              <i class="fas fa-check"></i> Update
+            </button>
+            <button class="btn btn-sm btn-danger" (click)="deleteOrder(order)">
+              <i class="fas fa-trash"></i> Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- View MODAL -->
+<div
+    id="orderModal"
+    class="modal-container"
+    [class.show]="showModal"
+    (click)="closeModal($event)"
+  >
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h5 class="modal-title">Order Details</h5>
+        <button class="close-button" (click)="closeModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="selectedOrder">
+          <h6>Customer Information</h6>
+          <p>
+            <strong>Name:</strong> {{ selectedOrder.firstName }}
+            {{ selectedOrder.lastName }}
+          </p>
+          <p><strong>Email:</strong> {{ selectedOrder.email }}</p>
+          <p><strong>Phone:</strong> {{ selectedOrder.phoneNumber }}</p>
+          <p>
+            <strong>Address:</strong> {{ selectedOrder.streetAddress }},
+            {{ selectedOrder.appartment }}, {{ selectedOrder.city }}
+          </p>
+
+          <hr />
+
+          <h6>Order Information</h6>
+          <p><strong>Order Number:</strong> {{ selectedOrder.orderNumber }}</p>
+          <p>
+            <strong>Order Date:</strong> {{ selectedOrder.orderDate | date }}
+          </p>
+          <p><strong>Status:</strong> {{ selectedOrder.orderStatus }}</p>
+          <p>
+            <strong>Payment Method:</strong> {{ selectedOrder.paymentMethod }}
+          </p>
+          <p>
+            <strong>Subtotal:</strong>
+            {{ selectedOrder.subTotal | egpCurrency }}
+          </p>
+          <p><strong>Total:</strong> {{ selectedOrder.total | egpCurrency }}</p>
+
+          <hr />
+
+          <h6>Products</h6>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Product ID</th>
+                <th>Size ID</th>
+                <th>Color ID</th>
+                <th>Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of selectedOrder.products">
+                <td>
+                  {{ getProductName(product.productId) }}
+                  {{ productName }}
+                </td>
+                <td>{{ getSizeName(product.sizeId) }}</td>
+                <td>{{ getColorName(product.colorId) }}</td>
+                <td>{{ product.quantity }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="!selectedOrder">
+          <p>No order selected.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closeModal()">Close</button>
+      </div>
+    </div>
+ </div>
+  <!-- Update Modal -->
+  <div
+    id="updateOrderModal"
+    class="modal-container"
+    [class.show]="showUpdateModal"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Update Order</h2>
+        <button class="close-button" (click)="closeUpdateModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <form #updateForm="ngForm" (ngSubmit)="updateOrder()">
+          <div *ngIf="selectedOrder">
+            <!-- Read-Only Fields -->
+            <div class="form-group">
+              <label for="orderNumber">Order Number:</label>
+              <input
+                id="orderNumber"
+                name="orderNumber"
+                [(ngModel)]="selectedOrder.orderNumber"
+                type="text"
+                class="form-control"
+                readonly
+              />
+            </div>
+            <div class="form-group">
+              <label for="paymentMethod">Payment Method:</label>
+              <input
+                id="paymentMethod"
+                name="paymentMethod"
+                [(ngModel)]="selectedOrder.paymentMethod"
+                type="text"
+                class="form-control"
+                readonly
+              />
+            </div>
+
+            <!-- Editable Fields -->
+            <div class="form-group">
+              <label for="orderStatus">Order Status:</label>
+              <select
+                id="orderStatus"
+                name="orderStatus"
+                [(ngModel)]="selectedOrder.orderStatus"
+                class="form-control"
+                required
+              >
+                <option [value]="2">Processing</option>
+                <option [value]="0">Delivered</option>
+                <option [value]="1">Cancelled</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="firstName">First Name:</label>
+              <input
+                id="firstName"
+                name="firstName"
+                [(ngModel)]="selectedOrder.firstName"
+                type="text"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="lastName">Last Name:</label>
+              <input
+                id="lastName"
+                name="lastName"
+                [(ngModel)]="selectedOrder.lastName"
+                type="text"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input
+                id="email"
+                name="email"
+                [(ngModel)]="selectedOrder.email"
+                type="email"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="phoneNumber">Phone Number:</label>
+              <input
+                id="phoneNumber"
+                name="phoneNumber"
+                [(ngModel)]="selectedOrder.phoneNumber"
+                type="text"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="city">City:</label>
+              <input
+                id="city"
+                name="city"
+                [(ngModel)]="selectedOrder.city"
+                type="text"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="streetAddress">Street Address:</label>
+              <input
+                id="streetAddress"
+                name="streetAddress"
+                [(ngModel)]="selectedOrder.streetAddress"
+                type="text"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="appartment">Apartment:</label>
+              <input
+                id="appartment"
+                name="appartment"
+                [(ngModel)]="selectedOrder.appartment"
+                type="text"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="subTotal">Subtotal:</label>
+              <input
+                id="subTotal"
+                name="subTotal"
+                [(ngModel)]="selectedOrder.subTotal"
+                type="number"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="total">Total:</label>
+              <input
+                id="total"
+                name="total"
+                [(ngModel)]="selectedOrder.total"
+                type="number"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <!-- Products Table -->
+            <div class="form-group">
+              <label>Products:</label>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Product Name</th>
+                    <th>Size ID</th>
+                    <th>Color ID</th>
+                    <th>Quantity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let product of selectedOrder.products">
+                    <td>
+                      {{ getProductName(product.productId) }}
+                      {{ productName }}
+                    </td>
+                    <td>{{ getSizeName(product.sizeId) }}</td>
+                    <td>{{ getColorName(product.colorId) }}</td>
+                    <td>
+                      <input
+                        disabled
+                        [(ngModel)]="product.quantity"
+                        name="quantity-{{ product.productId }}"
+                        type="number"
+                        class="form-control"
+                        required
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" (click)="closeUpdateModal()">
+              Cancel
+            </button>
+            <button class="btn btn-primary" type="submit">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

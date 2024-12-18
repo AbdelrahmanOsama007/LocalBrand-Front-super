@@ -1,0 +1,77 @@
+<div class="mat-app-background basic-container">
+    <div class="example-header">
+        <mat-form-field class="search-container p-0 col-md-6">
+            <input matInput id="searchparam" (input)="applyFilter($event)" placeholder="Search">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select value="0" (selectionChange)="sortByStatus($event.value)">
+            <mat-select-trigger>
+              <span class="status-indicator" [ngStyle]="{'background-color': getSortStatusColor(selectedSortStatus)}"></span>
+              {{ getStatusText(selectedSortStatus) }}
+            </mat-select-trigger>
+            <mat-option value="0"><span class="status-indicator" [ngStyle]="{'background-color': 'gray'}"></span> All Emails</mat-option>
+            <mat-option value="1"><span class="status-indicator" [ngStyle]="{'background-color': 'blue'}"></span> Unread</mat-option>
+            <mat-option value="2"><span class="status-indicator" [ngStyle]="{'background-color': 'green'}"></span> Solved</mat-option>
+            <mat-option value="4"><span class="status-indicator" [ngStyle]="{'background-color': 'orange'}"></span> Processing</mat-option>
+            <mat-option value="3"><span class="status-indicator" [ngStyle]="{'background-color': 'red'}"></span> Unsolved</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      
+      <div class="example-container mat-elevation-z8 table-responsive">
+        <mat-table [dataSource]="dataSource" matSort>
+      
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="emailDate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Date </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.emailDate}} </mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="message">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Message </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="message-content" (click)="openMessageModal(row.message)"> {{row.message}} </mat-cell>
+          </ng-container>
+          
+          <ng-container matColumnDef="emailstatus">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <mat-form-field appearance="fill">
+                <mat-select [(value)]="row.emailStatus" (selectionChange)="onStatusChange(row)">
+                  <mat-select-trigger>
+                    <span class="status-indicator" [ngStyle]="{'background-color': getStatusColor(row.emailStatus)}"></span>
+                    {{ getStatusLabel(row.emailStatus) }}
+                  </mat-select-trigger>
+                  <mat-option *ngFor="let status of statusOptions" [value]="status.value">
+                    <span class="status-indicator" [ngStyle]="{'background-color': status.color}"></span>
+                    {{ status.viewValue }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-cell>
+          </ng-container>
+          
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;">
+          </mat-row>
+        </mat-table>
+      
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      </div>
+</div>
+@if(isModalOpen){
+  <div class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="closeMessageModal()">&times;</span>
+      <p>{{ selectedMessage }}</p>
+    </div>
+  </div>
+}

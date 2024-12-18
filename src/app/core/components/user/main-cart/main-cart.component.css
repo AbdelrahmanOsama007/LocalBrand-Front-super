@@ -1,0 +1,38 @@
+.cart__product__item img {
+    width: 100px;
+    /* height: 100px;
+    object-fit: cover; */
+    border-radius: var(--border-radius);
+}
+.Kenan{
+    font-size: 10px;
+    display: block;
+    width: 24px;
+    height: 24px;
+}
+
+.Discount{
+    text-decoration: line-through;
+}
+.empty-box-text{
+    padding-bottom: 2rem;
+    font-size: 2rem;
+}
+
+td{
+    padding-right: 1rem !important;
+}
+.pointer{
+    cursor: pointer;
+}
+
+
+.cart__item{
+    gap: 0.5rem;
+}
+
+.cart__item__remove{
+    font-size: 1.5rem;
+}
+
+

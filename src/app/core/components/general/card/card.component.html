@@ -1,0 +1,37 @@
+    <app-image-expand [imagesource]="imagetoshow"></app-image-expand>
+    <ng-container *ngIf="isLoading; else notloading">
+
+        <ngx-skeleton-loader
+          count="1"
+          [theme]="{ height: '360px', width: '100%', 'margin-bottom': '10px' }"
+        ></ngx-skeleton-loader>
+        <ngx-skeleton-loader
+          count="2"
+          [theme]="{ height: '20px', width: '100%' }"
+        ></ngx-skeleton-loader>
+      </ng-container>
+
+    <ng-template #notloading>
+    <div (click)="GoToProductDetails(product.id)" class="product__item__pic set-bg cursor" [ngStyle]="{'background-image': 'url(' + product.images[0] + ')'}">
+
+            @if(product.isOutOfStock){
+                <div class="label stockout">out of stock</div>
+            }
+            @if(product.discount > 0 && product.isOutOfStock == false){
+                <div class="label sale">Sale</div>
+            }
+            <ul class="product__hover">
+                <li><a (click)="ExpandImage(product.images[0]); $event.stopPropagation()" class="image-popup"><span class="arrow_expand"></span></a></li>
+
+                <li><a [ngClass]="{'heart-icon-active': isInWishlist(product.id)}" 
+                    (click)="toggleWishlist(product.id); $event.stopPropagation()"><span class="icon_heart_alt"></span></a></li>
+                <li><a (click)="GoToProductDetails(product.id); $event.stopPropagation()"><span class="icon_bag_alt"></span></a></li>
+            </ul>
+        </div>
+        <div class="product__item__text">
+            <h6 class="textnowrap cursor"><a (click)="GoToProductDetails(product.id)">{{product.name}}</a></h6>
+            <div class="product__price">{{product.priceAfterDiscount | egpCurrency}} @if(product.discount > 0) {<span> {{product.priceBeforeDiscount | egpCurrency}}</span>}</div>
+        </div>
+    </ng-template>
+
+  

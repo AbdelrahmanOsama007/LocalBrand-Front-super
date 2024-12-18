@@ -1,0 +1,3 @@
+.toast-width-auto {
+    width: max-content !important;  /* Adjust width to content */
+  }

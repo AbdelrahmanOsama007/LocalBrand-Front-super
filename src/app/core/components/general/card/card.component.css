@@ -1,0 +1,23 @@
+.heart-icon {
+    background-color: transparent;
+    color: inherit;
+    cursor: pointer;
+}
+
+.heart-icon-active {
+    background-color: black;
+    color: white;
+}
+
+a {
+    cursor: pointer;
+}
+
+.cursor{
+    cursor: pointer;
+}
+@media (max-width: 768px) {
+    .label {
+        left: 19%;
+    }
+}

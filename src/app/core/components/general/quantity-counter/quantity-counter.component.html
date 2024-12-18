@@ -1,0 +1,14 @@
+<div class="quantity-counter">
+    <button (click)="decrement()" class="decrement-btn" [disabled]="quantity === 1">-</button>
+    <input type="number" [(ngModel)]="quantity" class="quantity-input" min="1" [readonly]="true" />
+    <button (click)="!last ? increment() : ''" [disabled]="loading || last" [disabled]="last" class="increment-btn"> 
+      @if(loading){
+        <span class="spinner-border spinner-border-sm" role="status"></span>
+
+      }@else{
+        <span>+</span>
+      }
+      </button>
+
+      
+  </div>

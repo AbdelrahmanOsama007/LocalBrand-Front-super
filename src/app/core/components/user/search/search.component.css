@@ -1,0 +1,17 @@
+.Kenan{
+    text-align: center;
+    margin-top: 3rem;
+}
+.Kenan input{
+    padding: 1rem;
+    width: 50%;
+}
+
+.empty-box-text{
+    padding-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.no-result-wrapper{
+    margin: 0 auto;
+}

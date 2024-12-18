@@ -1,0 +1,282 @@
+.message-content {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+  cursor: pointer;
+  display: block;
+  align-content: center;
+}
+
+.modal {
+  display: block;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: black;
+}
+
+.basic-container {
+  padding: 20px;
+  font-family: 'Roboto', Arial, sans-serif;
+  background-color: #f5f7fa;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  margin: 20px auto;
+  max-width: 1200px;
+}
+
+.example-header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding: 12px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding-top: 28px;
+}
+
+.mat-form-field {
+  font-size: 16px;
+  width: 100%;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  padding: 10px 14px;
+}
+
+.mat-form-field.mat-focused .mat-form-field-outline {
+  color: #3f51b5;
+  border-color: #3f51b5;
+}
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 600px;
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+  border-top: 2px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.mat-header-cell {
+  background-color: #f5f5f5;
+  font-weight: bold;
+  text-align: left;
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+  color: #333333;
+  font-size: 15px;
+}
+
+.mat-cell {
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 14px;
+  color: #555555;
+}
+
+.mat-header-row {
+  border-bottom: 2px solid #d0d0d0;
+}
+
+.mat-row:hover {
+  background-color: #f0f9ff;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.status-indicator {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle;
+  border: 2px solid white;
+}
+
+.mat-paginator {
+  background-color: #f5f5f5;
+  border-top: 2px solid #e0e0e0;
+  padding: 15px;
+  border-radius: 0 0 12px 12px;
+}
+
+.mat-paginator .mat-paginator-range-label {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.mat-paginator .mat-paginator-icon {
+  color: #3f51b5;
+  font-size: 20px;
+}
+
+.mat-option:hover {
+  background-color: rgba(63, 81, 181, 0.1);
+  color: #3f51b5;
+}
+
+.mat-select-trigger {
+  display: flex;
+  align-items: center;
+  padding: 6px;
+}
+
+.mat-form-field, .mat-cell, .mat-header-cell {
+  transition: all 0.3s ease-in-out;
+}
+
+.mat-row:hover .mat-cell {
+  color: #3f51b5;
+}
+
+.mat-elevation-z8 {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.version-info {
+  font-size: 10px;
+  color: gray;
+  text-align: right;
+  margin-top: 10px;
+}
+
+button.mat-raised-button {
+  background-color: #3f51b5;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+button.mat-raised-button:hover {
+  background-color: #2c3d9e;
+}
+
+@media (max-width: 768px) {
+  .example-container {
+    min-width: 100%;
+    padding: 10px;
+  }
+
+  .example-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mat-form-field {
+    margin-bottom: 10px;
+  }
+
+  .mat-header-cell, .mat-cell {
+    padding: 12px;
+    font-size: 12px;
+  }
+}
+
+/* Make the table container scrollable */
+.table-responsive {
+  overflow-x: auto;
+}
+
+/* Responsive design for small screens */
+@media (max-width: 768px) {
+  /* Hide table headers */
+  mat-header-row {
+    display: none;
+  }
+
+  /* Stack rows vertically */
+  mat-row {
+    display: block;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  mat-cell {
+    display: block;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+    align-items: start;
+  }
+
+  mat-cell:first-of-type{
+    padding-left: 10px;
+  }
+
+  mat-cell:last-child {
+    border-bottom: none;
+  }
+
+  /* Use data attributes to label fields */
+  mat-cell::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #555;
+  }
+
+  /* Adjust dropdown appearance */
+  mat-form-field {
+    width: 100%;
+  }
+
+  .status-indicator {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+    border-radius: 50%;
+  }
+
+  /* Modal adjustments for small screens */
+  .modal-content {
+    width: 90%;
+    padding: 15px;
+  }
+}
+
+

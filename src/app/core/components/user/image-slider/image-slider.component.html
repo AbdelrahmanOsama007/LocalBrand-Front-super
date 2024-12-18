@@ -1,0 +1,25 @@
+<div class="gallery-container">
+  <div class="main-image">
+    <img 
+      *ngIf="images.length" 
+      [src]="images[currentImageIndex]" 
+      alt="Main Image" 
+      [@fade] />
+  </div>
+  <div class="navigation">
+    <button class="nav-button left" (click)="prevImage()">&#10094;</button>
+    <button class="nav-button right" (click)="nextImage()">&#10095;</button>
+  </div>
+  <div class="thumbnails">
+    <img
+      *ngFor="let image of images; let i = index"
+      [src]="image"
+      (click)="selectImage(i)"
+      alt="Thumbnail"
+      class="thumbnail"
+      [class.active]="currentImageIndex === i"
+      [ngStyle]="{'opacity': currentImageIndex === i ? 1 : 0.5}" 
+    />
+  </div>
+</div> 
+

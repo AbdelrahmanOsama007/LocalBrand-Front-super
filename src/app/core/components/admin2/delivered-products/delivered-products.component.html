@@ -1,0 +1,31 @@
+<div class="container mt-4">
+  <h2 class="mb-4 text-center text-success">
+    <i class="fas fa-truck"></i> Delivered Orders
+  </h2>
+  <div class="table-responsive">
+    <table class="table table-hover table-striped table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th><i class="fas fa-hashtag"></i> Order Number</th>
+          <th><i class="fas fa-calendar-alt"></i> Order Date</th>
+          <th><i class="fas fa-user"></i> Customer Name</th>
+          <th><i class="fas fa-dollar-sign"></i> Total</th>
+          <th><i class="fas fa-check-circle"></i> Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of deliveredOrders" class="align-middle">
+          <td>{{ order.orderNumber }}</td>
+          <td>{{ order.orderDate | date:'mediumDate' }}</td>
+          <td>{{ order.firstName }} {{ order.lastName }}</td>
+          <td>${{ order.total | number:'1.2-2' }}</td>
+          <td>
+            <span class="badge badge-success">
+              <i class="fas fa-check"></i> Delivered
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

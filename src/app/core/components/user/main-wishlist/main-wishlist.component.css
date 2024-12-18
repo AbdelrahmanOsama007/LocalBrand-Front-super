@@ -1,0 +1,66 @@
+.cart__product__item img {
+    width: 100px;
+    /* height: 100px;
+    object-fit: cover; */
+    border-radius: var(--border-radius);
+}
+  
+.empty-box-text{
+    padding-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.truncate-text {
+    white-space: nowrap; /* Prevent the text from wrapping to the next line */
+    overflow: hidden; /* Hide the overflowing text */
+    text-overflow: ellipsis; /* Add the ellipsis (...) */
+}
+
+
+.card-wishlist{
+    max-width: 50%;
+    display: flex;
+    justify-content: center;
+
+}
+
+.wishlist-card{
+    border: 0;
+    border-radius: 0;
+}
+
+.wishlist-card-bottom{
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-top:0;
+}
+
+h5 {
+    font-size: 0.7rem; /* Default for larger screens */
+}
+
+p {
+    font-size: 0.5rem;
+}
+
+
+ 
+
+
+@media (min-width: 500px) {
+    .card-wishlist{
+        max-width: 30%;
+
+    }
+}
+
+
+
+.pointer{
+    cursor: pointer;
+}
+
+
+.close{
+
+    cursor: pointer;
+}

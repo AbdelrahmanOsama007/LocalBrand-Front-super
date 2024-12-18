@@ -1,0 +1,7 @@
+  
+  <div *ngIf="isOverlayOpen" class="overlay" (click)="onOverlayClick($event)">
+    <div class="overlay-content" (click)="$event.stopPropagation()">
+      <img [src]="currentImage" alt="Enlarged view" class="enlarged-image" />
+    </div>
+  </div>
+  

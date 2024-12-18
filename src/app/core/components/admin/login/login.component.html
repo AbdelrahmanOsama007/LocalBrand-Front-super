@@ -1,0 +1,43 @@
+<div class="login-container">
+    <div class="login-box">
+      <h2>Login</h2>
+      <form #loginform="ngForm" (ngSubmit)="onSubmit($event,loginform)">
+        @if(invalidMessage != ''){
+          <span>{{invalidMessage}}</span>
+        }
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Enter your email" name="email" [(ngModel)]="loginobject.email" #email="ngModel" required/>
+          @if(email.errors?.['required'] && loginform.submitted){
+            <span>Email is required</span>
+           }
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="password-wrapper">
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+              name="password" [(ngModel)]="loginobject.password" #password="ngModel" required
+              (input)="handlePasswordInput()"
+            />
+            <span
+              id="togglePassword"
+              class="toggle-password"
+              (click)="togglePasswordVisibility()"
+              style="display: none;">
+              👁️
+            </span>
+          </div>
+          @if(password.errors?.['required'] && loginform.submitted){
+            <span>Password is required</span>
+           }
+        </div>
+        <a style="cursor: pointer;" (click)="GoTOForgetPassword()" class="forgot-password">Forgot Password?</a>
+        <button type="submit" class="btn-login">Login</button>
+      </form>
+    </div>
+  </div>
+  
+  

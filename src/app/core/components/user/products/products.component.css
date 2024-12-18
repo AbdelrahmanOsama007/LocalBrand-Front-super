@@ -1,0 +1,9 @@
+a {
+    cursor: pointer;
+}
+
+.skeleton-multi-line-container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    gap: 5px; /* Adds uniform spacing */
+  }

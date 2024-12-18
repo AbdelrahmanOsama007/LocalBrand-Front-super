@@ -1,0 +1,123 @@
+
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a style="cursor: pointer;" (click)="GoToHome();"><i class="fa fa-home"></i> Home</a>
+                        <span>Shopping cart</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="shop-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    @if(products && products.length > 0){
+                        <div class="shop__cart__table">
+                            @for (product of products; track product.productId) {
+                                <div class="cart__item d-flex flex-column flex-md-row align-items-center justify-content-between mb-4 p-3 border rounded shadow-sm">
+                                    <!-- Product Image -->
+                                    <div class="cart__item__image mb-2 mb-md-0">
+                                        <img [src]="product.image" alt="{{product.productName}}" class="img-fluid" style="width: 200px; height: auto; cursor: pointer;" (click)="GoToProductDetails(product.productId)">
+                                    </div>
+                                    
+                                    <!-- Product Details -->
+                                    <div class="cart__item__details text-center text-md-left flex-grow-1 px-md-3">
+                                        <p class="mb-1" (click)="GoToProductDetails(product.productId)" style="cursor: pointer;">
+                                            {{product.productName}}
+                                        </p>
+                                        <div class="d-flex justify-content-center justify-content-md-start align-items-center">
+                                            <!-- Color -->
+                                            <span class="cart__item__color d-inline-block mr-3" 
+                                                  [ngStyle]="{'background': product.colorCode, 'border': (product.colorCode == '#fff' || product.colorCode == '#ffffff') ? '1px solid black' : ''}" 
+                                                  style="width: 20px; height: 20px;"></span>
+                                            <!-- Size and Price-->
+                                            <span class="cart__item__size ">Size: {{product.size}}</span>
+                                        </div>
+                                        <div class="cart__item__price text-center text-md-left pt-md-3">
+                                            <span class="mb-1">{{product.priceAfterDiscount | egpCurrency}}</span>
+                                            @if (product.discount > 0) {
+                                                <span class="text-muted ps-3 ps-md-0 d-md-block" style="text-decoration: line-through;">{{product.priceBeforeDiscount | egpCurrency}}</span>
+                                            }
+                                        </div>
+                                    </div>
+    
+
+    
+                                    <!-- Quantity -->
+                                    <div class="cart__item__quantity text-center">
+                                        <app-quantity-counter 
+                                            [ParentSubject]="ParentSubject" 
+                                            [product]="GetCurrentProduct(product.productId, product.sizeId, product.colorId)" 
+                                            (outPutQuantity)="getQuantity($event)">
+                                        </app-quantity-counter>
+                                    </div>
+    
+                                    <!-- Total Price -->
+                                    <div class="cart__item__total text-center ">
+                                       Total : <strong>{{product.priceAfterDiscount * product.quantity | egpCurrency}} </strong> 
+                                    </div>
+    
+                                    <!-- Remove Item -->
+                                    <div class="cart__item__remove text-center ps-md-3">
+                                        <span class="icon_close text-danger" style="cursor: pointer;" 
+                                              (click)="removeFromCartlist(product.productId, product.sizeId, product.colorId)"></span>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="cart__btn">
+                                <a style="cursor: pointer;" (click)="GoToShop('men')">Continue Shopping</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="discount__content">
+        
+                            </div>
+                        </div>
+                        <div class="col-lg-4 offset-lg-2">
+                            <div class="cart__total__procced">
+                                <h6>Cart total</h6>
+                                <ul>
+                                    @if(SubTotal != Total){
+                                        <li>SubTotal <span class="Discount">{{SubTotal | egpCurrency}}</span></li>
+                                    }
+                                    <li>Total <span style="color: black;">{{Total | egpCurrency}}</span></li>
+                                </ul>
+                                <a style="cursor: pointer; color: white;" (click)="GoToCheckout()" class="primary-btn">Proceed to checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                }@else{
+                    @if(isLoading){
+                        <div class="no-result-wrapper ">
+                        <ngx-skeleton-loader
+                        count="4"
+                        [theme]="{ height: '15px', width: '100%' , 'margin-top': '25px'}"
+                            ></ngx-skeleton-loader>
+            </div>
+                    }
+                    @else{
+                    <div class="d-flex flex-column align-items-center">
+                        <p class="empty-box-text">Cart is empty</p>
+                        <div class="cart__btn">
+                            <a style="cursor: pointer;" [routerLink]="['/home']" fragment="target-div">Continue Shopping</a>
+                        </div>
+                    </div>
+                }
+                }
+                </div>
+            </div>
+
+        </div>
+    </section>

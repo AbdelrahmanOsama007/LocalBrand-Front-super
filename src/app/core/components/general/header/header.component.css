@@ -1,0 +1,137 @@
+a {
+    cursor: pointer;
+}
+
+header{
+ padding: 0 !important;   
+}
+/* Offcanvas Menu Overlay (darkens the background) */
+.offcanvas-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Active state for the overlay */
+.offcanvas-menu-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Offcanvas Menu Wrapper */
+.offcanvas-menu-wrapper {
+    position: fixed;
+    top: 0;
+    right: -300px; /* Initially hidden off-screen */
+    width: 250px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    transition: right 0.3s ease;
+    z-index: 1000;
+    overflow: unset;
+}
+
+/* Active state for the menu (slide in) */
+.offcanvas-menu-wrapper.active {
+    right: 0;
+}
+
+/* Close Button */
+.offcanvas__close {
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+}
+
+/* Offcanvas Menu Items (Now showing text instead of icons) */
+.offcanvas__widget {
+    list-style-type: none;
+    padding-top: 3rem;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+
+.offcanvas__widget li {
+    margin-bottom: 20px;
+}
+
+.offcanvas__widget li a {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    text-decoration: none;
+}
+
+
+/* Offcanvas Logo */
+.offcanvas__logo img {
+    max-width: 150px;
+    display: block;
+    margin: 20px auto;
+}
+
+/* Mobile Menu Section */
+#mobile-menu-wrap {
+    margin-top: 30px;
+}
+
+.canvas__open{
+    position: unset !important;
+    align-self: center;
+}
+
+.wedgit-wrapper{
+    display: block;
+    align-self: center;
+}
+
+
+.circle-indicator {
+    position: fixed;
+    bottom: 20px; /* Distance from the bottom */
+    right: 20px;   /* Distance from the left */
+    width: 65px;  /* Circle width */
+    height: 65px; /* Circle height */
+    background-color: white; /* Circle background color */
+    color: black; /* Number color */
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 50%; /* Makes it a circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Optional shadow */
+    z-index: 1000; /* Ensures it's on top of other elements */
+    cursor: pointer;
+
+}
+
+.fixed-tip{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    height: 18px;
+    width: 18px;
+    background: #111111;
+    font-size: 10px;
+    font-weight: 500;
+    color: #ffffff;
+    line-height: 18px;
+    text-align: center;
+    border-radius: 50%;
+}
