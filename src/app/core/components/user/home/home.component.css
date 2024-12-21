@@ -150,4 +150,25 @@ a {
         font-size: 7px;
         line-height: 0.8;
     }
+    .services__item{
+        padding-left: 42px;
+        margin-bottom: 10px;
+    }
+    .services__item i{
+        font-size: 18px;
+    }
+    .services__item h6{
+        font-size: 20px;
+    }
+    .services__item p{
+        font-size: 15px;
+    }
+}
+.service-items{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.services__item{
+    flex: 1 1 calc(25% - 16px);
 }
