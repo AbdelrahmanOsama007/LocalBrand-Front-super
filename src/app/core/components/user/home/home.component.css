@@ -28,3 +28,41 @@ a {
     background-image: url('/assets/img/instagram/insta-6.jpg') !important;
     cursor: pointer;
 }
+@media (max-width: 576px) {
+    .instagram .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .instagram .col-lg-2,
+    .instagram .col-md-4,
+    .instagram .col-sm-4 {
+        flex: 0 0 calc(33.333% - 10px);
+        max-width: calc(33.333% - 10px);
+        box-sizing: border-box;
+    }
+
+    .instagram__item {
+        width: 100%;
+        padding-top: 100%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 8px;
+        position: relative;
+        height: 80%;
+    }
+
+    .instagram__text {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #fff;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+        font-size: 14px;
+        text-align: center;
+    }
+}
