@@ -1,36 +1,32 @@
 
 <app-home-slider></app-home-slider>
 
-<!-- <div class="sec-banner bg0 p-t-95 p-b-55">
-    <div>
-        <div class="row">
-            <div class="col-md-6 p-b-30 m-lr-auto">
-                <div class="block1" (click)="GetCategoryProducts('women')">
-                    <img src="/assets/img/banner-04.jpg" alt="IMG-BANNER">
-                    <div class="block1-txt">
-                        <div>
-                            <span class="block1-name"><b>Women</b></span>
-                            <div class="block1-info">New Trend</div>
-                        </div>
-                        <div class="block1-link">Shop Now</div>
+<div class="cat-main-container">
+    <div class="cat-sub-container">
+        <div class="cat-flex-container">
+            <div class="cat-block" (click)="GetCategoryProducts('women')">
+                <img src="/assets/img/banner-04.jpg" alt="IMG-BANNER">
+                <div class="cat-block-txt">
+                    <div>
+                        <span class="cat-block-name"><b>Women</b></span>
+                        <div class="cat-block-info">New Trend</div>
                     </div>
-                </div>                    
-            </div>
-            <div class="col-md-6 p-b-30 m-lr-auto">
-                <div class="block1" (click)="GetCategoryProducts('men')">
-                    <img src="/assets/img/banner-05.jpg" alt="IMG-BANNER">
-                    <div class="block1-txt">
-                        <div>
-                            <span class="block1-name"><b>Men</b></span>
-                            <div class="block1-info">New Trend</div>
-                        </div>
-                        <div class="block1-link">Shop Now</div>
+                    <div class="cat-block-link">Shop Now</div>
+                </div>
+            </div>                    
+            <div class="cat-block" (click)="GetCategoryProducts('men')">
+                <img src="/assets/img/banner-05.jpg" alt="IMG-BANNER">
+                <div class="cat-block-txt">
+                    <div>
+                        <span class="cat-block-name"><b>Men</b></span>
+                        <div class="cat-block-info">New Trend</div>
                     </div>
-                </div>                    
-            </div>
+                    <div class="cat-block-link">Shop Now</div>
+                </div>
+            </div>                    
         </div>
     </div>
-</div> -->
+</div>
 
 <!-- Product Section Begin -->
 <section class="product spad">
@@ -71,24 +67,6 @@
                         <h2>Check out our sale</h2>
                         <h5><span>Limited Time</span></h5>
                     </div>
-                    <!-- <div class="discount__countdown" id="countdown-time">
-                        <div class="countdown__item">
-                            <span>22</span>
-                            <p>Days</p>
-                        </div>
-                        <div class="countdown__item">
-                            <span>18</span>
-                            <p>Hour</p>
-                        </div>
-                        <div class="countdown__item">
-                            <span>46</span>
-                            <p>Min</p>
-                        </div>
-                        <div class="countdown__item">
-                            <span>05</span>
-                            <p>Sec</p>
-                        </div>
-                    </div> -->
                     <a style="cursor: pointer;" (click)="GetSales()">Shop now</a>
                 </div>
             </div>
