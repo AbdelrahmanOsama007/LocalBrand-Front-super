@@ -5,11 +5,12 @@ import { FooterComponent } from './core/components/general/footer/footer.compone
 import { filter } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { AdminHeaderComponent } from './core/components/admin/admin-header/admin-header.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, FooterComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, AdminHeaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

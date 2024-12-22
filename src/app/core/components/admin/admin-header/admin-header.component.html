@@ -1,0 +1,83 @@
+<div class="offcanvas-menu-overlay" [ngClass]="{'active': isOffcanvasOpen}" (click)="toggleOffcanvasMenu()"></div>
+
+<div class="offcanvas-menu-wrapper" [ngClass]="{'active': isOffcanvasOpen}">
+    <div class="offcanvas__close" (click)="toggleOffcanvasMenu()">+</div>
+    
+    <div class="offcanvas__logo">
+        <a style="cursor: pointer;" (click)="GoToHome();"><img src="assets/img/logo.png" alt="Logo"></a>
+    </div>
+    
+    <ul class="offcanvas__widget">
+        <li [ngClass]="{'active': activeMenuItem === 'Products'}">
+            <a (click)="GoToProductCruds();">Products</a>
+        </li>
+        <li [ngClass]="{'active': activeMenuItem === 'Categories'}">
+            <a (click)="GoToCategoryCruds();">Categories</a>
+        </li>
+        <li [ngClass]="{'active': activeMenuItem === 'DeliveredOrders'}">
+            <a (click)="GoToDeliveredOrders();">Delivered Orders</a>
+        </li>
+        <li [ngClass]="{'active': activeMenuItem === 'ProcessingOrders'}">
+            <a (click)="GoToProcessingOrders();">Processing Orders</a>
+        </li>
+        <li [ngClass]="{'active': activeMenuItem === 'CanceledOrders'}">
+            <a (click)="GoToCanceledOrders();">Canceled Orders</a>
+        </li>
+        <li [ngClass]="{'active': activeMenuItem === 'Emails'}">
+            <a (click)="GoToEmailCruds();">Emails</a>
+        </li>
+        <li>
+            <a (click)="ChangePassword();">ChangePassword</a>
+        </li>
+    </ul>
+</div>
+
+    <header class="header">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between">
+                <div class="canvas__open" (click)="toggleOffcanvasMenu()">
+                    <i class="fa fa-bars" ></i>
+                </div>
+
+                <div class="header__logo col-5 col-lg-1 text-right text-lg-left">
+            
+                        <a style="cursor: pointer;" (click)="GoToHome();"><img src="assets/img/logo.png" alt=""></a>
+                </div>
+                
+                <div>
+                    <nav class="header__menu text-center">
+                        <ul>
+                            <li [ngClass]="{'active': activeMenuItem === 'Products'}">
+                                <a (click)="GoToProductCruds();">Products</a>
+                            </li>
+                            <li [ngClass]="{'active': activeMenuItem === 'Categories'}">
+                                <a (click)="GoToCategoryCruds();">Categories</a>
+                            </li>
+                            <li [ngClass]="{'active': activeMenuItem === 'DeliveredOrders'}">
+                                <a (click)="GoToDeliveredOrders();">Delivered Orders</a>
+                            </li>
+                            <li [ngClass]="{'active': activeMenuItem === 'ProcessingOrders'}">
+                                <a (click)="GoToProcessingOrders();">Processing Orders</a>
+                            </li>
+                            <li [ngClass]="{'active': activeMenuItem === 'CanceledOrders'}">
+                                <a (click)="GoToCanceledOrders();">Canceled Orders</a>
+                            </li>
+                            <li [ngClass]="{'active': activeMenuItem === 'Emails'}">
+                                <a (click)="GoToEmailCruds();">Emails</a>
+                            </li>
+                        </ul>              
+                    </nav>
+                </div>
+
+                    <div class="header__right wedgit-wrapper">
+                        <div class="header__right__auth">
+                        </div>
+                        <ul class="header__right__widget">
+                            <li class="change-password-li"><a (click)="ChangePassword();">ChangePassword</a></li>
+                            <li><a (click)="LogOut();">LogOut</a></li>
+                        </ul>
+                    </div>
+            </div>
+
+        </div>
+    </header>
