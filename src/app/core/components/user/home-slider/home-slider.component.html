@@ -1,13 +1,11 @@
 <div class="slider-container">
   <div class="slides">
-    @for(slide of slides; track slide; let idx = $index, e = $even){
+    @for(slide of activearray; track slide; let idx = $index, e = $even){
 
     <div 
       class="slide" 
       [ngClass]="{'active': idx === currentSlide}">
       <img [src]="slide.imgUrl">
-
-     
     </div>
   }
   </div>

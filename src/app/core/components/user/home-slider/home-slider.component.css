@@ -70,3 +70,8 @@ img {
 .next {
   right: 10px;
 }
+@media (max-width: 768px) {
+  .slides{
+    height: 100vh;
+  }
+}
