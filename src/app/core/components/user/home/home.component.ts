@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { CardComponent } from '../../general/card/card.component';
 import { IProduct } from '../../../interfaces/IProduct';
 import { Subscription } from 'rxjs/internal/Subscription';

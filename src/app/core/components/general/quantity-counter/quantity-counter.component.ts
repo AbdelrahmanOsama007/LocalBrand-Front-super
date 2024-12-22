@@ -42,6 +42,7 @@ export class QuantityCounterComponent implements OnChanges , OnInit {
     if(this.quantity > 9){
       this.toastr.warning("For larg quantities contact our support");   
       this.last = true;
+      this.loading = false;
       return;
     }
     this.product.Quantity = this.quantity;
@@ -68,8 +69,7 @@ export class QuantityCounterComponent implements OnChanges , OnInit {
     if (this.quantity > 1) {
       this.quantity -= 1;
       this.sendquantity();
-      this.last = false
-
+      this.last = false;
     }
   }
   sendquantity(): void {

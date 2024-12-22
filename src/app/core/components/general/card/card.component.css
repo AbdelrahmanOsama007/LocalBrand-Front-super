@@ -5,7 +5,7 @@
 }
 
 .heart-icon-active {
-    background-color: black;
+    background-color: #ca1515;
     color: white;
 }
 
@@ -18,6 +18,9 @@ a {
 }
 @media (max-width: 768px) {
     .label {
-        left: 19%;
+        left: 0%;
+    }
+    .product__item__pic {
+        height: 278px !important;
     }
 }

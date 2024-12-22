@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, Input, PLATFORM_ID } from '@angular/core';
 import { IProduct } from '../../../interfaces/IProduct';
 import { EgpCurrencyPipe } from '../../../pipes/egp-currency.pipe';
-import { NgClass, NgIf, NgStyle } from '@angular/common';
+import { isPlatformBrowser, NgClass, NgIf, NgStyle } from '@angular/common';
 import { WishlistService } from '../../../services/wishlist.service';
 import { Router, RouterModule } from '@angular/router';
 import { ImageExpandComponent } from "../image-expand/image-expand.component";
@@ -20,23 +20,25 @@ export class CardComponent {
   @Input() product!: IProduct;
   imagetoshow!:string;
   isLoading: boolean = true;
-  constructor(private toastr: ToastrService,private _wishlistservice: WishlistService, private _router: Router, private _productservice: ProductService, private sss:ChangeDetectorRef) {}
+  constructor(private toastr: ToastrService,private _wishlistservice: WishlistService, private _router: Router, private _productservice: ProductService, private sss:ChangeDetectorRef, @Inject(PLATFORM_ID) private platformId:object) {}
 
   toggleWishlist(productId: number) {
-    let wishlist: number[] = JSON.parse(
-      localStorage.getItem('wishlist') || '[]'
-    );
-
-    if (wishlist.includes(productId)) {      
-      wishlist = wishlist.filter(id => id !== productId);
-      this.toastr.success("Removed from wishlist");   
-    } else {
-      wishlist.push(productId);
-      this.toastr.success("Added to wishlist");
+    if (isPlatformBrowser(this.platformId)){
+      let wishlist: number[] = JSON.parse(
+        localStorage.getItem('wishlist') || '[]'
+      );
+  
+      if (wishlist.includes(productId)) {      
+        wishlist = wishlist.filter(id => id !== productId);
+        this.toastr.success("Removed from wishlist");   
+      } else {
+        wishlist.push(productId);
+        this.toastr.success("Added to wishlist");
+      }
+  
+      localStorage.setItem('wishlist', JSON.stringify(wishlist));
+      this._wishlistservice.UpdateHeaderValue(true);
     }
-
-    localStorage.setItem('wishlist', JSON.stringify(wishlist));
-    this._wishlistservice.UpdateHeaderValue(true);
   }
 
   GoToProductDetails(productId: number) {
@@ -54,10 +56,13 @@ export class CardComponent {
   }
 
   isInWishlist(productId: number): boolean {
-    const wishlist: number[] = JSON.parse(
-      localStorage.getItem('wishlist') || '[]'
-    );
-    return wishlist.includes(productId);
+    if (isPlatformBrowser(this.platformId)){
+      const wishlist: number[] = JSON.parse(
+        localStorage.getItem('wishlist') || '[]'
+      );
+      return wishlist.includes(productId);
+    }
+    return false;
   }
 
   ngOnInit() {

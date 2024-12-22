@@ -23,7 +23,7 @@ export class HomeSliderComponent implements OnInit, OnDestroy {
   autoSlideInterval: any;
   isBrowser: boolean;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: any) {
+  constructor(@Inject(PLATFORM_ID) private platformId: object) {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
@@ -55,14 +55,18 @@ export class HomeSliderComponent implements OnInit, OnDestroy {
     }
   }
   updateArray(): void {
-    if (window.matchMedia('(max-width: 768px)').matches) {
-      this.activearray = this.moblileslides;
-    } else {
-      this.activearray = this.slides;
+    if (isPlatformBrowser(this.platformId)){
+      if (window.matchMedia('(max-width: 768px)').matches) {
+        this.activearray = this.moblileslides;
+      } else {
+        this.activearray = this.slides;
+      }
     }
   }
 listenToMediaQuery(): void {
-  const mediaQuery = window.matchMedia('(max-width: 768px)');
-  mediaQuery.addEventListener('change', () => this.updateArray());
+  if (isPlatformBrowser(this.platformId)){
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    mediaQuery.addEventListener('change', () => this.updateArray());
+  }
 }
 }

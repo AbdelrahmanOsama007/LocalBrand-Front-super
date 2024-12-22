@@ -7,3 +7,9 @@ a {
     flex-direction: column; /* Stack items vertically */
     gap: 5px; /* Adds uniform spacing */
   }
+
+  @media (max-width: 768px) {
+    .accessories{
+        width: 50% !important;
+      }
+}

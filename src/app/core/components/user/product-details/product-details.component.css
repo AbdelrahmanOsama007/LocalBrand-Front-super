@@ -72,7 +72,7 @@
 }
 
 .heart-icon-active {
-    background-color: black;
+    background-color: #ca1515;
     color: white;
 }
 
@@ -86,5 +86,8 @@
 	font-weight: 600;
 	color: #818589;
 	margin-bottom: 30px;
+}
+.icon_heart_alt{
+    color: white !important;
 }
 

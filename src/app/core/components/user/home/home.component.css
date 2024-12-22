@@ -172,3 +172,8 @@ a {
 .services__item{
     flex: 1 1 calc(25% - 16px);
 }
+@media (max-width: 768px) {
+    .accessories{
+        width: 50% !important;
+      }
+}

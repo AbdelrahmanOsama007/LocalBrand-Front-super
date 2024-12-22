@@ -1,6 +1,7 @@
 import { NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TokenValidationService } from '../../../services/token-validation.service';
 
 @Component({
   selector: 'app-admin-header',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrl: './admin-header.component.css'
 })
 export class AdminHeaderComponent implements OnInit {
-  constructor(private router: Router){}
+  constructor(private router: Router,private _tokenservice:TokenValidationService){}
   activeMenuItem: string = 'Products';
   isOffcanvasOpen = false;
   ngOnInit(): void {
@@ -73,6 +74,7 @@ GoToEmailCruds(){
 LogOut(){
   localStorage.removeItem('token');
   this.router.navigate(['/admin-login/ahmedeltalkhawy/550e8400-e29b-41d4-a716-446655440000']);
+  this._tokenservice.ValidateToken();
   this.isOffcanvasOpen = false;
 }
 ChangePassword(){

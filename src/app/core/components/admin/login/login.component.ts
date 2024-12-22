@@ -3,6 +3,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { ILogin } from '../../../interfaces/ILogIn';
 import { Router } from '@angular/router';
 import { AdminAuthService } from '../../../services/admin-auth.service';
+import { TokenValidationService } from '../../../services/token-validation.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ import { AdminAuthService } from '../../../services/admin-auth.service';
 export class LoginComponent {
   loginobject: ILogin = {email: '', password: ''}
   invalidMessage: string = '';
-  constructor(private router: Router, private _adminAuth: AdminAuthService){}
+  constructor(private router: Router, private _adminAuth: AdminAuthService, private _tokenservice:TokenValidationService){}
   handlePasswordInput() {
     const passwordInput = document.getElementById('password') as HTMLInputElement | null;
     const togglePassword = document.getElementById('togglePassword') as HTMLElement | null;
@@ -54,7 +55,8 @@ export class LoginComponent {
           if(result.token){
             this.invalidMessage = '';
             const token = (localStorage.setItem("token", result.token));
-            this.router.navigate(['admin/home']);
+            this.router.navigate(['/productcrud']);
+            this._tokenservice.ValidateToken();
           }
         },
         error: (error) => {
