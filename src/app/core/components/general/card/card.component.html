@@ -17,7 +17,7 @@
     <div (click)="GoToProductDetails(product.id)" (mouseover)="GetSecondImage()" (mouseout)="GetFirstImage()" class="product__item__pic set-bg cursor" [ngStyle]="{'background-image': 'url(' + currentImage + ')'}">
 
             @if(product.isOutOfStock){
-                <div class="label stockout">out of stock</div>
+                <div class="label stockout">Sold out</div>
             }
             @if(product.discount > 0 && product.isOutOfStock == false){
                 <div class="label sale">Sale</div>

@@ -29,4 +29,15 @@ a {
     .product__hover{
         display: none;
     }
+    .product__item__text{
+        padding-top: 12px;
+    }
+}
+@media (max-width: 390px) {
+    .product__item__pic{
+        background-size: cover;
+    }
+    .product__item__text{
+        padding-top: 0;
+    }
 }
