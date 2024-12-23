@@ -2,7 +2,11 @@ a {
     cursor: pointer;
 }
 header{
- padding: 0 !important;   
+ padding: 0 !important;
+ position: fixed;
+ width: 100%;
+ z-index: 999;
+ top: 0;
 }
 .offcanvas-menu-overlay {
     position: fixed;
