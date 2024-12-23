@@ -16,11 +16,17 @@ a {
 .cursor{
     cursor: pointer;
 }
+.product__item__pic {
+    transition: background-image 0.3s ease-in-out;
+  }
 @media (max-width: 768px) {
     .label {
         left: 0%;
     }
     .product__item__pic {
         height: 278px !important;
+    }
+    .product__hover{
+        display: none;
     }
 }

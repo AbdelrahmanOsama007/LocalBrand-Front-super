@@ -20,6 +20,7 @@ export class CardComponent {
   @Input() product!: IProduct;
   imagetoshow!:string;
   isLoading: boolean = true;
+  currentImage!: string;
   constructor(private toastr: ToastrService,private _wishlistservice: WishlistService, private _router: Router, private _productservice: ProductService, private sss:ChangeDetectorRef, @Inject(PLATFORM_ID) private platformId:object) {}
 
   toggleWishlist(productId: number) {
@@ -67,7 +68,13 @@ export class CardComponent {
 
   ngOnInit() {
     this.isLoading = false;
+    this.currentImage = this.product.images[0];
+  }
+  GetSecondImage(){
+    this.currentImage = this.product.images[1];
   }
 
-
+  GetFirstImage(){
+    this.currentImage = this.product.images[0];
+  }
 }
