@@ -40,7 +40,7 @@ export const routes: Routes = [
     { path: 'forget-password', component: ForgetPasswordComponent},
     { path: 'admin', component: AdminDashBoardComponent, canActivate: [authAdminGuard]},
     { path: 'admin/home', component: AdminHomeComponent, canActivate: [authAdminGuard]},
-    { path: 'ordercrud', component: OrderCrudComponent, canActivate: [authAdminGuard]},
+    { path: 'canceledorder', component: OrderCrudComponent, canActivate: [authAdminGuard]},
     { path: 'productcrud', component: ProductscrudComponent, canActivate: [authAdminGuard]},
     { path: 'delorder', component: DeliveredProductsComponent, canActivate: [authAdminGuard]},
     { path: 'processingorder', component: ProcessingProductsComponent, canActivate: [authAdminGuard]},
