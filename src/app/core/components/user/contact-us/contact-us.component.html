@@ -60,9 +60,12 @@
                                 @if(email.errors?.['pattern'] && (email.touched || UserEmailform.submitted)){
                                     <span class="error-message">Please enter a valid email</span>
                                 }
-                                <textarea placeholder="Message" name="message" [(ngModel)]="UserEmail.Message" #message="ngModel" required></textarea>
+                                <textarea placeholder="Message" name="message" [(ngModel)]="UserEmail.Message" #message="ngModel" required pattern="^[a-zA-Z0-9\s\-+=()@!?/&%$#]*$"></textarea>
                                 @if(message.errors?.['required'] && (message.touched || UserEmailform.submitted)){
                                     <span class="error-message">Message field is required</span>
+                                }
+                                @if(message.errors?.['pattern'] && (message.touched || UserEmailform.submitted)){
+                                    <span class="error-message">You are using some special characters that are not allowed</span>
                                 }
                             <div>
                                 <button type="submit" class="site-btn m-3">Send Message</button>

@@ -90,4 +90,8 @@
 .icon_heart_alt{
     color: white !important;
 }
-
+@media (max-width: 768px) {
+    .accessories{
+        width: 50% !important;
+      }
+}

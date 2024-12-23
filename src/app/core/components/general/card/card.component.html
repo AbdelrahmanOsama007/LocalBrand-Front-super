@@ -1,4 +1,6 @@
-    <app-image-expand [imagesource]="imagetoshow"></app-image-expand>
+    @if(imagetoshow){
+        <app-image-expand [imagesource]="imagetoshow"></app-image-expand>
+    }
     <ng-container *ngIf="isLoading; else notloading">
 
         <ngx-skeleton-loader

@@ -19,7 +19,7 @@ export class ImageExpandComponent implements OnChanges {
 
 
   isOverlayOpen = false;
-  currentImage!: string;
+  currentImage : string = "";
 
   openOverlay(imageSrc: string): void {
     this.currentImage = imageSrc;
