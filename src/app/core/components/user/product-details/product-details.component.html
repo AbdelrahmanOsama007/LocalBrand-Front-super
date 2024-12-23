@@ -142,7 +142,7 @@
             
                             <ul>
                                 <li><a [ngClass]="{'heart-icon-active': isInWishlist(product.id)}" 
-                                    (click)="toggleWishlist(product.id)" id="HeartIcon"><span class="icon_heart_alt"></span></a></li>
+                                    (click)="toggleWishlist(product.id)" id="HeartIcon"><span [ngClass]="{'span-heart-icon-active': isInWishlist(product.id)}" class="icon_heart_alt"></span></a></li>
                                 <li><a style="cursor: pointer;" (click)="ScrollToDetails()"><span class="icon_adjust-horiz"></span></a></li>
                             </ul>
                         </div>

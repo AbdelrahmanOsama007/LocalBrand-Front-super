@@ -73,6 +73,10 @@
 
 .heart-icon-active {
     background-color: #ca1515;
+    color: white !important;
+}
+
+.span-heart-icon-active{
     color: white;
 }
 
@@ -86,9 +90,6 @@
 	font-weight: 600;
 	color: #818589;
 	margin-bottom: 30px;
-}
-.icon_heart_alt{
-    color: white !important;
 }
 @media (max-width: 768px) {
     .accessories{
