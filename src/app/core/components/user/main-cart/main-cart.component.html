@@ -41,7 +41,7 @@
                                         <div class="cart__item__price text-center text-md-left pt-md-3">
                                             <span class="mb-1">{{product.priceAfterDiscount | egpCurrency}}</span>
                                             @if (product.discount > 0) {
-                                                <span class="text-muted ps-3 ps-md-0 d-md-block" style="text-decoration: line-through;">{{product.priceBeforeDiscount | egpCurrency}}</span>
+                                                <span class="text-muted ps-3 ps-md-0 d-md-block Discount">{{product.priceBeforeDiscount | egpCurrency}}</span>
                                             }
                                         </div>
                                     </div>

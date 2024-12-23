@@ -13,6 +13,7 @@
 
 .Discount{
     text-decoration: line-through;
+    color: #ca1515 !important;
 }
 .empty-box-text{
     padding-bottom: 2rem;
