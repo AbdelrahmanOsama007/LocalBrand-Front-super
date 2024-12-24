@@ -164,7 +164,7 @@ export class ProductDetailsComponent implements OnInit , OnDestroy {
   }
 
   GoToError(){
-    this.router.navigate(['/error'], { queryParams: { retryUrl: '/check-out' } });
+    this.router.navigate(['/error'], { queryParams: { retryUrl: '/home' } });
   }
 
   GOToCategory(id:string){

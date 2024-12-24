@@ -41,7 +41,7 @@ export class LoginComponent {
   }
 
   GoToError(){
-    this.router.navigate(['/error'], { queryParams: { retryUrl: '/home' } });
+    this.router.navigate(['/error'], { queryParams: { retryUrl: '/admin-login/ahmedeltalkhawy/550e8400-e29b-41d4-a716-446655440000' } });
   }
 
   onSubmit(event : any , loginform:NgForm){

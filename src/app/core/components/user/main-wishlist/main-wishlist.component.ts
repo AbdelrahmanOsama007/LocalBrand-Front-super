@@ -27,13 +27,12 @@ export class MainWishlistComponent implements OnInit, OnDestroy {
     this.subscription = this._wishlistservice.GetWishlistProducts(this.Ids).subscribe({
       next: (result:IOperationResult) => {
         if(result.success){
-          console.log(result.data);
           this.products = result.data as IWishlistProduct[];
           this.isLoading = false;
         }
       },
-      error: (error) => {
-        console.log(error);
+      error: () => {
+        this.GoToError();
       }
     });
   }
@@ -47,6 +46,10 @@ export class MainWishlistComponent implements OnInit, OnDestroy {
 
   GoToHome(){
     this.router.navigate(['/home'])
+  }
+
+  GoToError(){
+    this.router.navigate(['/error'], { queryParams: { retryUrl: '/wishlist' } });
   }
 
   GoToProductDetails(productId: number) {

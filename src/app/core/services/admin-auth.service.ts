@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 import { ILogin } from '../interfaces/ILogIn';
 import { IEmail } from '../interfaces/IEmail';
+import { IChangepassword } from '../interfaces/IChangepassword';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,9 @@ export class AdminAuthService {
 
   ForgetPassword(email:IEmail): Observable<any>{
     return this._HttpClient.post<any>(`${environment.BaseURL}/api/auth/forgot-password`,email);
+  }
+
+  ChangePassword(model:IChangepassword): Observable<any>{
+    return this._HttpClient.post<any>(`${environment.BaseURL}/api/auth/change-password`,model);
   }
 }

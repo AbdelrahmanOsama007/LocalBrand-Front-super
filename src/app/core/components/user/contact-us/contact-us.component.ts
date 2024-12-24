@@ -19,7 +19,7 @@ export class ContactUsComponent implements OnDestroy {
   subscription!: Subscription;
   UserEmail: IUserEmail = {Name:'' , Email:'' , Message:''};
   GoToError(){
-    this.router.navigate(['/error'], { queryParams: { retryUrl: '/home' } });
+    this.router.navigate(['/error'], { queryParams: { retryUrl: '/contact-us' } });
   }
   onSubmit(event : any , UserEmailform:NgForm){
     if(UserEmailform.invalid){

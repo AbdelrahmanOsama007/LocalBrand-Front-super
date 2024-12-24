@@ -52,8 +52,8 @@ export class MainCartComponent implements OnInit {
           this.isLoading = false
         }
       },
-      error: (error) => {
-        console.log(error);
+      error: () => {
+        this.GoToError();
       }
     }
     ))
@@ -105,6 +105,9 @@ export class MainCartComponent implements OnInit {
   }
   GoToHome(){
     this._router.navigate(['/home'])
+  }
+  GoToError(){
+    this._router.navigate(['/error'], { queryParams: { retryUrl: '/cart' } });
   }
   removeFromCartlist(productid:number, sizeid:number, colorid:number): void {
     this.productsinfo = this.productsinfo.filter(p => !(p.ProductId == productid && p.SizeId == sizeid && p.ColorId == colorid));

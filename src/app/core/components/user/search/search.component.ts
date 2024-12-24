@@ -39,7 +39,7 @@ export class SearchComponent implements OnInit , OnDestroy {
 }
 
 GoToError(){
-  this.router.navigate(['/error'], { queryParams: { retryUrl: '/home' } });
+  this.router.navigate(['/error'], { queryParams: { retryUrl: '/search' } });
 }
 
 SearchProduct(searchtext:Event){

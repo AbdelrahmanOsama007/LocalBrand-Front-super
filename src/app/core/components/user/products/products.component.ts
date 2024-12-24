@@ -78,6 +78,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.router.navigate(['/home'])
   }
 
+  GoToError(){
+    this.router.navigate(['/error'], { queryParams: { retryUrl: '/home' } });
+  }
+
   GetProductsByCatId(id: number) {
     this._productservice.GetProductsByCatId(id).subscribe({
       next: (result: IOperationResult) => {
@@ -85,8 +89,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
           this.products = result.data as IProduct[];
         }
       },
-      error: (error) => {
-        console.log(error);
+      error: () => {
+        this.GoToError();
       },
     });
   }
@@ -99,8 +103,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
             this.products = result.data as IProduct[];
           }
         },
-        error: (error) => {
-          console.log(error);
+        error: () => {
+          this.GoToError();
         }
       })
     )

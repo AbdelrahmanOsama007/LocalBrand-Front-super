@@ -17,7 +17,7 @@ export class ForgetPasswordComponent {
   emailobject: IEmail = {email: ''};
   constructor(private router: Router,private toastr: ToastrService, private _adminAuth: AdminAuthService){}
   GoToError(){
-    this.router.navigate(['/error'], { queryParams: { retryUrl: '/home' } });
+    this.router.navigate(['/error'], { queryParams: { retryUrl: '/forget-password' } });
   }
   GoToLogin(){
     this.router.navigate(['/admin-login/ahmedeltalkhawy/550e8400-e29b-41d4-a716-446655440000'])
