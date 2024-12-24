@@ -50,7 +50,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   GetCategoryProducts(id:string){
     this._categoryobserver.updateProductsState(true);
-    let idToLower = id.toLowerCase(); 
+    let idToLower = id.toLowerCase();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
     this.router.navigate(['/products',idToLower]);
   }
 

@@ -125,6 +125,10 @@ export class ProductDetailsComponent implements OnInit , OnDestroy {
   }  
 
   GetColorImages(colorId: number) {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
     this.SelectedColorId = colorId;
     const color = this.AvailableColors.find(a => a.colorId === colorId);
     if(color == null){
@@ -135,7 +139,6 @@ export class ProductDetailsComponent implements OnInit , OnDestroy {
     }
     this.SendCounterObject();
     this.CheckStock();
-
   }
 
   ChangeStyle(selectedSize: string, sizeId: number, sizeColors: any[]) {
