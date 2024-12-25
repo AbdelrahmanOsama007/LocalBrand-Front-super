@@ -64,6 +64,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   GetSales(){
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
     this.router.navigate(['/sale']);
   }
 
