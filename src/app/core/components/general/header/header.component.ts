@@ -74,7 +74,11 @@ export class HeaderComponent implements OnInit {
 
   GetCategoryProducts(id:string){
     this._categoryobserver.updateProductsState(true);
-    let idToLower = id.toLowerCase(); 
+    let idToLower = id.toLowerCase();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
     this.router.navigate(['/products',idToLower]);
     this.isOffcanvasOpen = false;
   }
