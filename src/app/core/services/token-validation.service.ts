@@ -2,12 +2,14 @@ import { isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 import { BehaviorSubject } from 'rxjs';
+import { AdminAuthService } from './admin-auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenValidationService {
-  constructor(@Inject(PLATFORM_ID) private platformId:object) { }
+  constructor(@Inject(PLATFORM_ID) private platformId:object, private _adminAuth: AdminAuthService) { }
 
     private HeaderStateSubject = new BehaviorSubject<boolean>(false);
     HeaderState$ = this.HeaderStateSubject.asObservable();
@@ -22,12 +24,16 @@ export class TokenValidationService {
     }
     if (token) {
     try {
-      const decodedToken: any = jwtDecode(token);
-      const currentTime = Date.now() / 1000;
-      if (decodedToken.exp < currentTime) {
-        this.updateHeaderState(false);
-      }
-      this.updateHeaderState(true);
+      this._adminAuth.IsAuth().subscribe({
+        next: () =>{
+          this.updateHeaderState(true);
+        },
+        error: (error) => {
+          if (error instanceof HttpErrorResponse && error.status === 401 && error.url && error.url.includes('/api/is-auth')) {
+              this.updateHeaderState(false);
+          }
+        }
+      })
     } catch (error) {
       this.updateHeaderState(false);
     }

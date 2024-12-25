@@ -1,6 +1,6 @@
 .Kenan{
     text-align: center;
-    margin-top: 3rem;
+    margin-top: 10rem;
 }
 .Kenan input{
     padding: 1rem;
@@ -18,5 +18,8 @@
 @media (max-width: 768px) {
     .accessories{
         width: 50% !important;
+      }
+      .Kenan input{
+        width: 94%;
       }
 }

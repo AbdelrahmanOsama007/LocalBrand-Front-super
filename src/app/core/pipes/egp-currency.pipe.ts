@@ -11,7 +11,7 @@ export class EgpCurrencyPipe implements PipeTransform {
       style: 'currency',
       currency: 'EGP'
     }).format(value);
-    return 'LE ' + formattedValue.replace('EGP', '').trim();
+    return formattedValue.replace('EGP', '').trim() + ' ' + 'EGP';
   }
 
 }

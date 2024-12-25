@@ -16,9 +16,9 @@
       <tbody>
         <tr *ngFor="let order of deliveredOrders" class="align-middle">
           <td>{{ order.orderNumber }}</td>
-          <td>{{ order.orderDate | date:'mediumDate' }}</td>
+          <td>{{ order.orderDate }}</td>
           <td>{{ order.firstName }} {{ order.lastName }}</td>
-          <td>${{ order.total | number:'1.2-2' }}</td>
+          <td>{{ order.total | egpCurrency }}</td>
           <td>
             <span class="badge badge-success">
               <i class="fas fa-check"></i> Delivered

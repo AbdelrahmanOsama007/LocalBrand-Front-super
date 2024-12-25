@@ -16,7 +16,7 @@
       <tbody>
         <tr *ngFor="let order of cancelledOrders">
           <td>{{ order.orderNumber }}</td>
-          <td>{{ order.orderDate | date }}</td>
+          <td>{{ order.orderDate }}</td>
           <td>{{ order.firstName }} {{ order.lastName }}</td>
           <td>{{ order.total | egpCurrency }}</td>
           <td>Cancelled</td>
