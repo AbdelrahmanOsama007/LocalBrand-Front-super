@@ -35,7 +35,8 @@ export class AdminHeaderComponent implements OnInit {
       this.activeMenuItem = 'DeliveredOrders';
     } else if(currentUrl.includes('/emailcrud')){
       this.activeMenuItem = 'Emails';
-    }
+    } else if(currentUrl.includes('/colorcrud'))
+      this.activeMenuItem = 'Colors';
      else {
       this.activeMenuItem = '';
     }
@@ -69,6 +70,10 @@ GoToCanceledOrders(){
 }
 GoToEmailCruds(){
   this.router.navigate(['/emailcrud']);
+  this.isOffcanvasOpen = false;
+}
+GoToColorCruds(){
+  this.router.navigate(['/colorcrud']);
   this.isOffcanvasOpen = false;
 }
 LogOut(){

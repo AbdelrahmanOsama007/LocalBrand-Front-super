@@ -65,6 +65,9 @@
                             <li [ngClass]="{'active': activeMenuItem === 'Emails'}">
                                 <a (click)="GoToEmailCruds();">Emails</a>
                             </li>
+                            <li [ngClass]="{'active': activeMenuItem === 'Colors'}">
+                                <a (click)="GoToColorCruds();">Colors</a>
+                            </li>
                         </ul>              
                     </nav>
                 </div>
@@ -74,7 +77,7 @@
                         </div>
                         <ul class="header__right__widget">
                             <li class="change-password-li"><a (click)="ChangePassword();">ChangePassword</a></li>
-                            <li><a (click)="LogOut();">LogOut</a></li>
+                            <li><a (click)="LogOut();">Logout</a></li>
                         </ul>
                     </div>
             </div>

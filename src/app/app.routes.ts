@@ -22,6 +22,7 @@ import { SaleProductsComponent } from './core/components/user/sale-products/sale
 import { EmailsComponent } from './core/components/admin/emails/emails.component';
 import { DeliveredProductsComponent } from './core/components/admin2/delivered-products/delivered-products.component';
 import { ProcessingProductsComponent } from './core/components/admin2/processing-products/processing-products.component';
+import { ColorsComponent } from './core/components/admin/colors/colors.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -46,5 +47,6 @@ export const routes: Routes = [
     { path: 'processingorder', component: ProcessingProductsComponent, canActivate: [authAdminGuard]},
     { path: 'catcrud', component: CatcrudComponent, canActivate: [authAdminGuard]},
     { path: 'emailcrud', component: EmailsComponent, canActivate: [authAdminGuard]},
+    { path: 'colorcrud', component: ColorsComponent, canActivate: [authAdminGuard]},
     { path: '**', redirectTo: 'home' },
 ];

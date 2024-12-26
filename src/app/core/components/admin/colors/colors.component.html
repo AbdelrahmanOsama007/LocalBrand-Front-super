@@ -1,0 +1,74 @@
+<div class="mat-app-background basic-container">
+    <div class="example-header">
+        <div class="search-container pb-3 px-0 pb-md-0 col-md-6">
+            <input id="searchparam" (input)="applyFilter($event)" placeholder="Search">
+        </div>
+        <div class="button-container p-md-0 px-0 col-md-4">
+          <button class="add-color-btn btn btn-success" mat-button (click)="AddColor();">Add Color</button>
+        </div>
+      </div>
+      
+      <div class="example-container mat-elevation-z8 table-responsive">
+        <mat-table [dataSource]="dataSource" matSort>
+      
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.colorName}}</mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="code">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="justify-content-center"> Color </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="justify-content-center">
+              <div style="margin-right: 17px;"
+                class="color-box" 
+                [style.backgroundColor]="row.colorCode" 
+                matTooltip="{{row.colorCode}}">
+              </div>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef class="justify-content-center"> Actions </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="justify-content-center">
+              <button mat-button color="primary" (click)="GetColorById(row.id)">Update</button>
+              <button mat-button color="warn" (click)="DeleteColor()">Delete</button>
+            </mat-cell>
+          </ng-container>
+          
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;">
+          </mat-row>
+        </mat-table>
+      
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      </div>
+</div>
+
+@if(isModalOpen){
+  <div class="modal">
+    <div class="modal-content" (click)="onDivClick($event)" #addmodal>
+      <span class="close" (click)="closeMessageModal()">&times;</span>
+      <form #Colorform="ngForm" (ngSubmit)="onSubmit($event,Colorform)">
+        <mat-form-field class="search-container mt-3 p-0 col-md-12">
+          <input matInput type="text" name="colorname" [(ngModel)]="CurrentColor.colorName" #colorname="ngModel" required pattern="[a-zA-Z\s]+" maxlength="20" minlength="3" placeholder="Name">
+        </mat-form-field>
+        @if(colorname.errors?.['required'] && (colorname.touched || Colorform.submitted)){
+          <span class="error-message">Name field is required</span>
+        }
+        @if(colorname.errors?.['minlength'] && (colorname.touched || Colorform.submitted)){
+          <span class="error-message">Name field minimum length is 3 letters</span>
+        }
+        @if(colorname.errors?.['maxlength'] && (colorname.touched || Colorform.submitted)){
+          <span class="error-message">Name field maximum length is 20 letters</span>
+        }
+        @if(colorname.errors?.['pattern'] && (colorname.touched || Colorform.submitted)){
+          <span class="error-message">Name field must contain only English alphabetic characters</span>
+        }
+        <color-sketch [(color)]="CurrentColor.colorCode" [(ngModel)]="CurrentColor.colorCode" name="colorcode" #colorcode="ngModel" (onChangeComplete)="onColorChange($event)"></color-sketch>
+        <div class="text-end px-0">
+          <button type="submit" class="save-btn mt-3 mx-0 col-md-6 btn btn-success">Save</button>
+      </div>
+      </form>
+    </div>
+  </div>
+}
