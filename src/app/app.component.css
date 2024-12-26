@@ -62,7 +62,7 @@
 
   #logo-spinner {
     opacity: 1;
-    visibility: hidden;
+    visibility: visible;
     /* transition: opacity .5s ease-out, visibility 0s linear .5s; */
     z-index: 99999;
 }
