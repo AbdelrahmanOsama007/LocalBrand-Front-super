@@ -31,7 +31,7 @@
             <mat-header-cell *matHeaderCellDef class="justify-content-center"> Actions </mat-header-cell>
             <mat-cell *matCellDef="let row" class="justify-content-center">
               <button mat-button color="primary" (click)="GetColorById(row.id)">Update</button>
-              <button mat-button color="warn" (click)="DeleteColor()">Delete</button>
+              <button mat-button color="warn" (click)="DeleteColor(row.id)">Delete</button>
             </mat-cell>
           </ng-container>
           
@@ -49,9 +49,9 @@
     <div class="modal-content" (click)="onDivClick($event)" #addmodal>
       <span class="close" (click)="closeMessageModal()">&times;</span>
       <form #Colorform="ngForm" (ngSubmit)="onSubmit($event,Colorform)">
-        <mat-form-field class="search-container mt-3 p-0 col-md-12">
-          <input matInput type="text" name="colorname" [(ngModel)]="CurrentColor.colorName" #colorname="ngModel" required pattern="[a-zA-Z\s]+" maxlength="20" minlength="3" placeholder="Name">
-        </mat-form-field>
+        <div class="search-container pb-3 px-0 pb-md-0 col-md-6 mb-3">
+          <input class="input-colorname" type="text" name="colorname" [(ngModel)]="CurrentColor.colorName" #colorname="ngModel" required pattern="[a-zA-Z\s]+" maxlength="20" minlength="3" placeholder="Color Name">
+        </div>
         @if(colorname.errors?.['required'] && (colorname.touched || Colorform.submitted)){
           <span class="error-message">Name field is required</span>
         }

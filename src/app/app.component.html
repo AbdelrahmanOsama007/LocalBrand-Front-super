@@ -5,23 +5,25 @@
         <img id="logo" src="assets/img/logo.png" alt="Loading..." class="logo" />
     </div>
  }
-@if(!isErrorRoute){
-	@if(isAuth){
-		<app-admin-header></app-admin-header>
+ @else{
+	@if(!isErrorRoute){
+		@if(isAuth){
+			<app-admin-header></app-admin-header>
+		}
+		@else{
+			<app-header></app-header>
+		}
 	}
-	@else{
-		<app-header></app-header>
-	}
-}
-<div style="margin-top: 85px;">
-	<router-outlet></router-outlet>
-		<!-- Back to top -->
-		<div class="btn-back-to-top" id="myBtn">
-			<span class="symbol-btn-back-to-top">
-				<i class="zmdi zmdi-chevron-up"></i>
-			</span>
-		</div>
-		@if(!isErrorRoute && !isAuth){
-			<app-footer></app-footer>
-		}	
-</div>
+	<div style="margin-top: 85px;">
+		<router-outlet></router-outlet>
+			<!-- Back to top -->
+			<div class="btn-back-to-top" id="myBtn">
+				<span class="symbol-btn-back-to-top">
+					<i class="zmdi zmdi-chevron-up"></i>
+				</span>
+			</div>
+			@if(!isErrorRoute && !isAuth){
+				<app-footer></app-footer>
+			}	
+	</div>
+ }

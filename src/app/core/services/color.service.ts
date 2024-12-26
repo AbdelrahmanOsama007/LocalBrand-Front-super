@@ -24,4 +24,7 @@ export class ColorService {
   AddColor(object:IColor):Observable<IOperationResult>{
     return this._HttpClient.post<IOperationResult>(`${environment.BaseURL}/api/Color/AddColor`,object);
   }
+  DeleteColor(id:number):Observable<IOperationResult>{
+    return this._HttpClient.post<IOperationResult>(`${environment.BaseURL}/api/Color/DeleteColor`,id);
+  }
 }

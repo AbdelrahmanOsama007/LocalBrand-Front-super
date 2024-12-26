@@ -345,12 +345,15 @@ color-sketch  >>> .sketch-picker {
   width: 100% !important;
   box-sizing: border-box;
 }
-#searchparam{
+#searchparam,.input-colorname{
   height: 56px;
   padding-left: 10px;
   width: 100%;
   border-radius: 4px;
   border: 1px solid #74777f;
+}
+mat-table,mat-paginator{
+  background-color: white;
 }
   
   

@@ -112,7 +112,6 @@ export class ColorsComponent implements OnInit, OnDestroy {
           if(result.success){
             this.isModalOpen = true;
             this.CurrentColor = result.data as IColor;
-            console.log(this.CurrentColor);
           }
         },
         error: (error) => {
@@ -130,8 +129,41 @@ export class ColorsComponent implements OnInit, OnDestroy {
       this.CurrentColor.colorCode = '';
       this.isModalOpen = true;
     }
-    DeleteColor(){
-
+    DeleteColor(id:number){
+      this.subscription.push(
+        this._colorservice.DeleteColor(id).subscribe({
+          next: (result:IOperationResult) => {
+            if(result.success){
+              Swal.fire({
+                title: "Success",
+                text: "Color deleted successfully",
+                icon: "success"
+              });
+              const paginationObject: IColorPagination = {
+                searchParam: '',
+                pageNumber: 1,
+                pageSize: 5
+              };
+              this.FetchColors(paginationObject);
+            }
+            else{
+              Swal.fire({
+                title: "Failed",
+                text: "Something went wrong. Color not deleted",
+                icon: "error"
+              });
+            }
+          },
+          error: (error) => {
+            if(error instanceof HttpErrorResponse && error.status === 401){
+              this.router.navigate(['/admin-login/ahmedeltalkhawy/550e8400-e29b-41d4-a716-446655440000']);
+            }
+            else{
+              this.GoToError();
+            }
+          }
+        })
+      )
     }
     closeMessageModal(): void {
       this.isModalOpen = false;
@@ -153,6 +185,12 @@ export class ColorsComponent implements OnInit, OnDestroy {
                       icon: "success"
                     });
                     Colorform.resetForm();
+                    const paginationObject: IColorPagination = {
+                      searchParam: '',
+                      pageNumber: 1,
+                      pageSize: 5
+                    };
+                    this.FetchColors(paginationObject);
                   }
                   else{
                     Swal.fire({
@@ -185,6 +223,12 @@ export class ColorsComponent implements OnInit, OnDestroy {
                       icon: "success"
                     });
                     Colorform.resetForm();
+                    const paginationObject: IColorPagination = {
+                      searchParam: '',
+                      pageNumber: 1,
+                      pageSize: 5
+                    };
+                    this.FetchColors(paginationObject);
                   }
                   else {
                     Swal.fire({
