@@ -19,11 +19,12 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs/internal/Subscription';
 import Swal from 'sweetalert2';
 import { error } from 'console';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @Component({
   selector: 'app-colors',
   standalone: true,
-  imports: [ColorSketchModule,CommonModule,MatFormFieldModule,MatInputModule,MatTableModule,MatPaginatorModule,MatSortModule,MatSelectModule,MatTooltipModule,FormsModule],
+  imports: [ColorSketchModule,CommonModule,MatFormFieldModule,MatInputModule,MatTableModule,MatPaginatorModule,MatSortModule,MatSelectModule,MatTooltipModule,FormsModule,NgxSkeletonLoaderModule],
   templateUrl: './colors.component.html',
   styleUrl: './colors.component.css'
 })
@@ -36,16 +37,17 @@ export class ColorsComponent implements OnInit, OnDestroy {
   subscription : Subscription[] = [];
   CurrentColor: IColor = {id: 0,colorName: '#000000', colorCode: ''};
   isModalOpen: boolean = false;
+  isLoading: boolean = true;
 
   ngOnInit(): void {
-        const colors: IColorPagination[] = [];
-        this.dataSource = new MatTableDataSource(colors);
-        const paginationObject: IColorPagination = {
-          searchParam: '',
-          pageNumber: 1,
-          pageSize: 5
-        };
-        this.FetchColors(paginationObject);
+    const colors: IColorPagination[] = [];
+    this.dataSource = new MatTableDataSource(colors);
+    const paginationObject: IColorPagination = {
+      searchParam: '',
+      pageNumber: 1,
+      pageSize: 5
+    };
+    this.FetchColors(paginationObject);
   }
 
     ngAfterViewInit() {
@@ -94,6 +96,7 @@ export class ColorsComponent implements OnInit, OnDestroy {
             this.paginator.pageSize = result.data.pageSize;
             this.paginator.pageIndex = result.data.pageNumber - 1;
             this.dataSource.sort = this.sort;
+            this.isLoading = false;
           }
         },
         error: (error) => {

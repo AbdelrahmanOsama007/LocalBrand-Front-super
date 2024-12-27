@@ -2,7 +2,7 @@ import { AfterContentInit, AfterViewInit, Component, Inject, OnInit, PLATFORM_ID
 import { NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './core/components/general/header/header.component';
 import { FooterComponent } from './core/components/general/footer/footer.component';
-import { filter } from 'rxjs';
+import { filter, timer } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { AdminHeaderComponent } from './core/components/admin/admin-header/admin-header.component';
@@ -32,14 +32,19 @@ export class AppComponent implements AfterContentInit , OnInit{
     ).subscribe(() => {    
       this.isErrorRoute = this.router.url.includes('/error');
     });
+    this.triggerFlagChange();
   }
+  
 
   ngAfterContentInit() {
-   
-      setTimeout(() => {
-        this.isLoading = false;
-      }, 1500); // Delay for fade out
-    
+      // setTimeout(() => {
+      //   this.isLoading = false;
+      // }, 1500); // Delay for fade out
+  }
+  triggerFlagChange() {
+    timer(1500).subscribe(() => {
+      this.isLoading= false;
+    })
   }
 }
 

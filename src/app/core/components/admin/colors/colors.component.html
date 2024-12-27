@@ -7,7 +7,12 @@
           <button class="add-color-btn btn btn-success" mat-button (click)="AddColor();">Add Color</button>
         </div>
       </div>
-      
+      <!-- @if(isLoading){
+        <ngx-skeleton-loader
+        count="1"
+        [theme]="{ height: '30px', width: '100%' , 'margin-bottom': '-2px' }"
+            ></ngx-skeleton-loader>
+      } -->
       <div class="example-container mat-elevation-z8 table-responsive">
         <mat-table [dataSource]="dataSource" matSort>
       
