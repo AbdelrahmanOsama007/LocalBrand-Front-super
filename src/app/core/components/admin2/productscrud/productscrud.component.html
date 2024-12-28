@@ -401,7 +401,7 @@
           >
             <option
               *ngFor="let subCategory of subCategories"
-              [value]="subCategory.categoryId"
+              [value]="subCategory.subCategoryId"
             >
               {{ subCategory.subCategoryName }}
             </option>
@@ -440,21 +440,12 @@
                 <option
                   *ngFor="let color of availableColors"
                   [value]="color.id"
-                  class="color-option"
+                  [ngStyle]="{
+                    backgroundColor: color.colorCode,
+                    color: getContrastingTextColor(color.colorCode)
+                  }"
                 >
-                  <span
-                    class="color-circle"
-                    [ngStyle]="{
-                      background: color.colorCode,
-                      border:
-                        color.colorCode === color.colorCode ||
-                        color.colorCode === color.colorCode
-                          ? '1px solid black'
-                          : ''
-                    }"
-                  >
-                    {{ color.colorName }}
-                  </span>
+                  {{ color.colorName }}
                 </option>
               </select>
 

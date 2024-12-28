@@ -211,3 +211,11 @@
   }
 }
 
+.color-box {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  border: 1px solid #000; /* Optional: Highlight colors */
+  border-radius: 50%; /* Optional: Make it a circle */
+}

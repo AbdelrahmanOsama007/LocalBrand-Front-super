@@ -21,6 +21,13 @@ import { ICategory, ISubCategory } from '../../../interfaces/ICatadmin';
 import { EgpCurrencyPipe } from '../../../pipes/egp-currency.pipe';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
 
 @Component({
   selector: 'app-productscrud',
@@ -34,6 +41,13 @@ import Swal from 'sweetalert2';
     CloudinaryModule,
     EgpCurrencyPipe,
     NgTemplateOutlet,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatSelectModule,
+    MatTooltipModule,
   ],
 })
 export class ProductscrudComponent implements OnInit {
@@ -552,5 +566,17 @@ export class ProductscrudComponent implements OnInit {
     };
 
     return messages[controlName];
+  }
+  getContrastingTextColor(colorCode: string): string {
+    // Convert HEX to RGB
+    const r = parseInt(colorCode.slice(1, 3), 16);
+    const g = parseInt(colorCode.slice(3, 5), 16);
+    const b = parseInt(colorCode.slice(5, 7), 16);
+
+    // Calculate luminance
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+    // Return black or white based on luminance
+    return luminance > 0.5 ? 'black' : 'white';
   }
 }
