@@ -8,14 +8,14 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { IOperationResult } from '../../../interfaces/IOperationResult';
 import { CartService } from '../../../services/cart.service';
 import { Router } from '@angular/router';
-import { DOCUMENT, NgStyle } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-check-out',
   standalone: true,
-  imports: [FormsModule, EgpCurrencyPipe, NgStyle],
+  imports: [FormsModule, EgpCurrencyPipe],
   templateUrl: './check-out.component.html',
   styleUrl: './check-out.component.css'
 })
