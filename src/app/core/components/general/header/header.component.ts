@@ -84,27 +84,47 @@ export class HeaderComponent implements OnInit {
   }
 
   GoToWishlist(){
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
     this.router.navigate(['/wishlist']);
     this.isOffcanvasOpen = false;
 
   }
 
   GoToHome(){
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
     this.router.navigate(['/home']);
     this.isOffcanvasOpen = false;
   }
 
   GoToContact(){
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
     this.router.navigate(['/contact-us']);
     this.isOffcanvasOpen = false;
   }
 
   GoToCart(){
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
     this.router.navigate(['/cart'])
     this.isOffcanvasOpen = false;
   }
 
   GoToSearchComponent(){
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
     this.router.navigate(['/search']);
     this.isOffcanvasOpen = false;
   }
