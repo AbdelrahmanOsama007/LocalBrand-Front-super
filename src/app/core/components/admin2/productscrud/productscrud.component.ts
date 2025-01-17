@@ -112,7 +112,6 @@ export class ProductscrudComponent implements OnInit {
           Validators.required,
           Validators.minLength(5),
           Validators.maxLength(150),
-          Validators.pattern(/^[a-zA-Z\s\-]+$/), // Letters, spaces, hyphens
         ],
       ],
       summary: ['', [Validators.required, Validators.maxLength(300)]], // New field
@@ -196,9 +195,6 @@ export class ProductscrudComponent implements OnInit {
         }
         if (this.productForm.get('name')?.hasError('maxlength')) {
           errors.push('Name cannot exceed 150 characters.');
-        }
-        if (this.productForm.get('name')?.hasError('pattern')) {
-          errors.push('Name can only contain letters, spaces, and hyphens.');
         }
       }
 
