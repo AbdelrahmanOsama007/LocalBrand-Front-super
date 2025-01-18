@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment.development';
 import { ICategory, ICategoryResponse } from '../interfaces/ICatadmin';
 
 @Injectable({
@@ -42,7 +43,8 @@ export class CategoryService {
   // Delete a category
   deleteCategory(id: number): Observable<ICategoryResponse> {
     return this.http.post<ICategoryResponse>(
-      `https://orca-app-sw4g7.ondigitalocean.app/api/category/DeleteCategory`,id
+      `https://orca-app-sw4g7.ondigitalocean.app/api/category/DeleteCategory=${id}`,
+      {}
     );
   }
 
