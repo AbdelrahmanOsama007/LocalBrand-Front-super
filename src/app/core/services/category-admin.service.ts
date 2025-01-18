@@ -43,7 +43,7 @@ export class CategoryService {
   deleteCategory(id: number): Observable<ICategoryResponse> {
     return this.http.post<ICategoryResponse>(
       `${environment.BaseURL}/api/category/DeleteCategory/${id}`,
-    id);
+    {});
   }
 
   // Get sub-categories for a category
