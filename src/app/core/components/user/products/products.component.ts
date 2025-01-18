@@ -56,6 +56,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
           case 'contact':
               id = 5;
               break;
+          case 'men&women':
+              id = 10;
+              break;
           default:
               id = 0; 
       }        if(id != 0){
