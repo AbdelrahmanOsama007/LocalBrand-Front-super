@@ -14,7 +14,7 @@
       </ng-container>
 
     <ng-template #notloading>
-    <div (click)="GoToProductDetails(product.id)" (mouseover)="GetSecondImage()" (mouseout)="GetFirstImage()" class="product__item__pic set-bg cursor" [ngStyle]="{'background-image': 'url(' + currentImage + ')'}">
+    <div (click)="GoToProductDetails(product.id)" (touchstart)="GetSecondImage()" (touchend)="GetFirstImage()" (mouseover)="GetSecondImage()" (mouseout)="GetFirstImage()" class="product__item__pic set-bg cursor" [ngStyle]="{'background-image': 'url(' + currentImage + ')'}">
 
             @if(product.isOutOfStock){
                 <div class="label stockout">Sold out</div>
