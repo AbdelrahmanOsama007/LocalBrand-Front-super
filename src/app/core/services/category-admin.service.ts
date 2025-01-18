@@ -42,7 +42,7 @@ export class CategoryService {
   // Delete a category
   deleteCategory(id: number): Observable<ICategoryResponse> {
     return this.http.post<ICategoryResponse>(
-      `${environment.BaseURL}/api/category/DeleteCategory?id=${id}`,
+      `${environment.BaseURL}/api/category/DeleteCategory/${id}`,
     id);
   }
 
