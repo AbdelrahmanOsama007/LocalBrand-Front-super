@@ -131,23 +131,23 @@ export class HeaderComponent implements OnInit {
 
   setActiveMenuItem() {
     const currentUrl = this.router.url;
-    
-    if (currentUrl.includes('/home')) {
-      this.activeMenuItem = 'home';
-    } else if (currentUrl.includes('/cart')) {
-      this.activeMenuItem = 'cart';
+    if (currentUrl.includes('/products/men&women')) {
+      this.activeMenuItem = 'Men&Women';
+    } else if (currentUrl.includes('/products/unisex')) {
+      this.activeMenuItem = 'Unisex';
+    } else if (currentUrl.includes('/products/accessories')) {
+      this.activeMenuItem = 'Accessories';
     } else if (currentUrl.includes('/products/women')) {
       this.activeMenuItem = 'Women';
     } else if (currentUrl.includes('/products/men')) {
       this.activeMenuItem = 'Men';
+    } else if (currentUrl.includes('/home')) {
+      this.activeMenuItem = 'home';
+    } else if (currentUrl.includes('/cart')) {
+      this.activeMenuItem = 'cart';
     } else if (currentUrl.includes('/contact')) {
       this.activeMenuItem = 'contact';
-    } else if(currentUrl.includes('/products/unisex')){
-      this.activeMenuItem = 'Unisex';
-    } else if(currentUrl.includes('/products/accessories')){
-      this.activeMenuItem = 'Accessories';
-    }
-     else {
+    } else {
       this.activeMenuItem = '';
     }
   }
