@@ -3,21 +3,21 @@
 <div class="cat-main-container">
     <div class="cat-sub-container">
         <div class="cat-flex-container">
-            <div class="cat-block" (click)="GetCategoryProducts('women')">
+            <div class="cat-block" (click)="GetCategoryProducts('men')">
                 <img src="/assets/img/banner-04.jpg" alt="IMG-BANNER">
                 <div class="cat-block-txt">
                     <div>
-                        <span class="cat-block-name"><b>Women</b></span>
+                        <span class="cat-block-name"><b>Men & Women</b></span>
                         <div class="cat-block-info">New Trend</div>
                     </div>
                     <div class="cat-block-link">Shop Now</div>
                 </div>
             </div>                    
-            <div class="cat-block" (click)="GetCategoryProducts('men')">
+            <div class="cat-block" (click)="GetCategoryProducts('accessories')">
                 <img src="/assets/img/banner-05.jpg" alt="IMG-BANNER">
                 <div class="cat-block-txt">
                     <div>
-                        <span class="cat-block-name"><b>Men</b></span>
+                        <span class="cat-block-name"><b>Accessories</b></span>
                         <div class="cat-block-info">New Trend</div>
                     </div>
                     <div class="cat-block-link">Shop Now</div>
@@ -32,19 +32,19 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-4">
-                <div class="section-title">
+                <!-- <div class="section-title">
                     <h4>BEST SELLER</h4>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="row property__gallery">
-            @for (product of products; track product.id) {
+            <!-- @for (product of products; track product.id) {
             <div class="col-lg-3 col-md-4 col-sm-6 mix accessories">
                 <div class="product__item">
                     <app-card [product]="product"></app-card>
                 </div>
             </div>
-            }
+            } -->
         </div>
     </div>
 </section>
@@ -81,7 +81,7 @@
             <div class="services__item">
                 <i class="fa fa-car"></i>
                 <h6>Free Shipping</h6>
-                <p>For all oder over $99</p>
+                <p>For all oder over 1500 EGP</p>
             </div>
             <div class="services__item">
                 <i class="fa fa-money"></i>

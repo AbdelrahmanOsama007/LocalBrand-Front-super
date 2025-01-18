@@ -1,8 +1,8 @@
 <div class="mat-app-background basic-container">
     <div class="example-header">
-        <mat-form-field class="search-container p-0 col-md-6">
+        <div class="search-container pb-3 px-0 pb-md-0 col-md-6">
             <input matInput id="searchparam" (input)="applyFilter($event)" placeholder="Search">
-        </mat-form-field>
+        </div>
         <mat-form-field>
           <mat-select value="0" (selectionChange)="sortByStatus($event.value)">
             <mat-select-trigger>
@@ -69,7 +69,7 @@
 </div>
 @if(isModalOpen){
   <div class="modal">
-    <div class="modal-content">
+    <div class="modal-content" (click)="onDivClick($event)" #messagemodel>
       <span class="close" (click)="closeMessageModal()">&times;</span>
       <p>{{ selectedMessage }}</p>
     </div>

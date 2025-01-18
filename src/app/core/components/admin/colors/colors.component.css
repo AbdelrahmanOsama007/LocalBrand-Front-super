@@ -317,11 +317,11 @@ button[color="warn"] {
 button[color="warn"]:hover {
   background-color: #c62828;
 }
+.error-message-container{
+  margin-top: 10px;
+}
 .error-message{
   color: red;
-}
-.button-container{
-  
 }
 .add-color-btn{
   width: 100%;

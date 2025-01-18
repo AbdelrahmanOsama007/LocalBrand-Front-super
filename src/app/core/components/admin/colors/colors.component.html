@@ -56,19 +56,27 @@
       <form #Colorform="ngForm" (ngSubmit)="onSubmit($event,Colorform)">
         <div class="search-container pb-3 px-0 pb-md-0 col-md-6 mb-3">
           <input class="input-colorname" type="text" name="colorname" [(ngModel)]="CurrentColor.colorName" #colorname="ngModel" required pattern="[a-zA-Z\s]+" maxlength="20" minlength="3" placeholder="Color Name">
+          @if(colorname.errors?.['required'] && (colorname.touched || Colorform.submitted)){
+            <div class="error-message-container">
+              <span class="error-message">Name field is required</span>
+            </div>
+          }
+          @if(colorname.errors?.['minlength'] && (colorname.touched || Colorform.submitted)){
+            <div class="error-message-container">
+              <span class="error-message">Name field minimum length is 3 letters</span>
+            </div>
+          }
+          @if(colorname.errors?.['maxlength'] && (colorname.touched || Colorform.submitted)){
+            <div class="error-message-container">
+              <span class="error-message">Name field maximum length is 20 letters</span>
+            </div>
+          }
+          @if(colorname.errors?.['pattern'] && (colorname.touched || Colorform.submitted)){
+            <div class="error-message-container">
+              <span class="error-message">Name field must contain only English alphabetic characters</span>
+            </div>
+          }
         </div>
-        @if(colorname.errors?.['required'] && (colorname.touched || Colorform.submitted)){
-          <span class="error-message">Name field is required</span>
-        }
-        @if(colorname.errors?.['minlength'] && (colorname.touched || Colorform.submitted)){
-          <span class="error-message">Name field minimum length is 3 letters</span>
-        }
-        @if(colorname.errors?.['maxlength'] && (colorname.touched || Colorform.submitted)){
-          <span class="error-message">Name field maximum length is 20 letters</span>
-        }
-        @if(colorname.errors?.['pattern'] && (colorname.touched || Colorform.submitted)){
-          <span class="error-message">Name field must contain only English alphabetic characters</span>
-        }
         <color-sketch [(color)]="CurrentColor.colorCode" [(ngModel)]="CurrentColor.colorCode" name="colorcode" #colorcode="ngModel" (onChangeComplete)="onColorChange($event)"></color-sketch>
         <div class="text-end px-0">
           <button type="submit" class="save-btn mt-3 mx-0 col-md-6 btn btn-success">Save</button>

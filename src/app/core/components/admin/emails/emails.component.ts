@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, NgModule, OnInit, ViewChild } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -43,6 +43,16 @@ export class EmailsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild('messagemodel') myDiv!: ElementRef;
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    if (this.myDiv && !this.myDiv.nativeElement.contains(event.target)) {
+      this.isModalOpen = false;
+      }
+    }
+    onDivClick(event: MouseEvent) {
+      event.stopPropagation();
+    }
 
   constructor(private _emailsservice: EmailsService, private router: Router) {}
   ngOnInit(): void {

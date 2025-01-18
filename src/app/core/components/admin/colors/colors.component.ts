@@ -37,7 +37,6 @@ export class ColorsComponent implements OnInit, OnDestroy {
   subscription : Subscription[] = [];
   CurrentColor: IColor = {id: 0,colorName: '#000000', colorCode: ''};
   isModalOpen: boolean = false;
-  isLoading: boolean = true;
 
   ngOnInit(): void {
     const colors: IColorPagination[] = [];
@@ -96,7 +95,6 @@ export class ColorsComponent implements OnInit, OnDestroy {
             this.paginator.pageSize = result.data.pageSize;
             this.paginator.pageIndex = result.data.pageNumber - 1;
             this.dataSource.sort = this.sort;
-            this.isLoading = false;
           }
         },
         error: (error) => {
