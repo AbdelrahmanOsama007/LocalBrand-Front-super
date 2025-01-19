@@ -10,12 +10,14 @@ import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core
 })
 export class HomeSliderComponent implements OnInit, OnDestroy {
   slides = [
-    { imgUrl: 'https://images.squarespace-cdn.com/content/v1/66a112f13bc71a7edaecb5aa/a321d1af-b14b-4237-ae7d-48bd8971a7a1/2024-07_Messi-Family-Hero_01.jpg?format=2500w' },
-    { imgUrl: 'https://images.squarespace-cdn.com/content/v1/66a112f13bc71a7edaecb5aa/e05643a8-5234-46f3-820c-dd7adb6fceb2/2024-07_Messi-Family_01.jpg?format=2500w' },
+    { imgUrl: 'assets/img/desk1.jpg' },
+    { imgUrl: 'assets/img/desk2.jpg' },
+    { imgUrl: 'assets/img/desk3.jpg' }
     ];
     moblileslides = [
-      {imgUrl: 'https://shopzedzee.com/cdn/shop/files/BOO06198.jpg?v=1730245848&width=1500'},
-      { imgUrl: 'https://shopzedzee.com/cdn/shop/files/BOO06021.jpg?v=1730245848&width=1500'}
+      { imgUrl: 'assets/img/mob1.jpg' },
+      { imgUrl: 'assets/img/mob2.jpg' },
+      { imgUrl: 'assets/img/mob3.jpg' }
     ];
     activearray = [{imgUrl:''}];
 
