@@ -132,7 +132,7 @@ export class ProductscrudComponent implements OnInit {
         [Validators.required, Validators.min(0), Validators.max(100)],
       ],
       bestSeller: [true],
-      subCategoryId: [
+      subcatId: [
         null,
         [Validators.required, Validators.min(1)], // Positive integer
       ],
@@ -179,7 +179,9 @@ export class ProductscrudComponent implements OnInit {
     this.productForm.reset();
     this.productImages = [];
   }
-
+  onColorChange(index: number) {
+    console.log(`Color changed for stock #${index}`);
+  }
   // Save the product (add or edit)
   saveProduct(): void {
     if (this.productForm.invalid) {
@@ -289,7 +291,7 @@ export class ProductscrudComponent implements OnInit {
           : [this.productImages[index]],
       })
     );
-
+    debugger;
     const productData = {
       ...this.productForm.value,
       stocks: formattedStocks,
@@ -302,7 +304,7 @@ export class ProductscrudComponent implements OnInit {
       delete productData['id'];
     }
     console.log('Prepared productData:', productData);
-
+    debugger;
     if (this.isEditMode) {
       this.productService.updateProduct(productData, productData.id).subscribe({
         next: (result: IOperationResult) => {
