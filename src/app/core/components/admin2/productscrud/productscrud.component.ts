@@ -6,6 +6,7 @@ import {
   FormArray,
   ReactiveFormsModule,
   FormsModule,
+  FormControl,
 } from '@angular/forms';
 import { CommonModule, NgTemplateOutlet } from '@angular/common';
 import { ProductService } from '../../../services/product.service';
@@ -28,6 +29,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { from } from 'rxjs';
+import { color } from '@cloudinary/url-gen/qualifiers/background';
 
 @Component({
   selector: 'app-productscrud',
@@ -52,6 +55,7 @@ import { MatTableModule } from '@angular/material/table';
 })
 export class ProductscrudComponent implements OnInit {
   products: IProductadmin[] = [];
+  imagesArray: string[][] = [];
   categories: ICategory[] = [];
   availableColors: IColor[] = []; // Store colors from API
   availableSizes: ISize[] = []; // Store sizes from API
@@ -72,18 +76,23 @@ export class ProductscrudComponent implements OnInit {
   availableCategories: ICategory[] = [];
   availableSubCategories: any;
   subCategories: ISubCategory[] = [];
+  form: any;
+
   constructor(
     private fb: FormBuilder,
     private productService: ProductService,
     private catservices: CategoryService,
     private cdr: ChangeDetectorRef,
+
     private toastr: ToastrService
-  ) {
+  ) 
+  {
     this.productService.imageUpload$.subscribe(
       (data: { imagePreviews: any[]; index: number }) => {
         this.flag = false;
         this.productService.uploadImage(data.imagePreviews).subscribe({
           next: (res: any) => {
+            
             console.log('Upload successful. Response:', res);
             if (Array.isArray(this.productImages[data.index])) {
               this.productImages[data.index].push(...res);
@@ -136,14 +145,23 @@ export class ProductscrudComponent implements OnInit {
         null,
         [Validators.required, Validators.min(1)], // Positive integer
       ],
-      stocks: this.fb.array([]),
+      stocks: this.fb.array([
+        new FormGroup({
+          colorid: new FormControl(),
+          sizes: new FormArray([
+            new FormGroup({
+              quantity: new FormControl(),
+              sizeid: new FormControl(),
+            }),
+          ]),
+        }),
+      ]),
       images: null,
     });
 
     this.loadProducts();
     this.loadColors();
     this.loadSizes();
-    this.addStock();
     this.loadCategories();
   }
 
@@ -272,31 +290,32 @@ export class ProductscrudComponent implements OnInit {
     }
 
     // Transform stocks array to ensure sizeId and colorId are integers
-    const formattedStocks = this.stocks.value.map((stock: any) => ({
-      sizeId: parseInt(stock.sizeId, 10), // Ensure sizeId is an integer
-      colorId: parseInt(stock.colorId, 10), // Ensure colorId is an integer
-      quantity: stock.quantity,
-    }));
+    // const formattedStocks = this.stocks.value.map((stock: any) => ({
+    //   sizeId: parseInt(stock.sizeId, 10), // Ensure sizeId is an integer
+    //   colorId: parseInt(stock.colorId, 10), // Ensure colorId is an integer
+    //   quantity: stock.quantity,
+    // }));
 
     // Format images array
     const formattedImages = this.stocks.value.map(
       (images: any, index: number) => ({
-        colorId: parseInt(this.stocks.value[index].colorId, 10), // Ensure colorId is an integer
+        colorId: parseInt(this.stocks.value[index].colorid, 10), // Ensure colorId is an integer
         colorCode:
           this.availableColors.find(
-            (c) => c.id === parseInt(this.stocks.value[index].colorId, 10)
+            (c) => c.id === parseInt(this.stocks.value[index].colorid, 10)
           )?.colorCode || '#000000',
         imageUrls: Array.isArray(this.productImages[index])
           ? this.productImages[index]
           : [this.productImages[index]],
       })
     );
-    debugger;
     const productData = {
       ...this.productForm.value,
-      stocks: formattedStocks,
+      stocks: this.formattedStocks,
       images: formattedImages,
+      SubCategoryId: +this.productForm.get('subcatId')?.value,
     };
+    console.log(this.productForm.value);
     if (productData.bestSeller == null) {
       productData.bestSeller = false;
     }
@@ -304,7 +323,6 @@ export class ProductscrudComponent implements OnInit {
       delete productData['id'];
     }
     console.log('Prepared productData:', productData);
-    debugger;
     if (this.isEditMode) {
       this.productService.updateProduct(productData, productData.id).subscribe({
         next: (result: IOperationResult) => {
@@ -434,29 +452,33 @@ export class ProductscrudComponent implements OnInit {
   }
 
   // Add a new size
-  addSize() {
-    this.sizes.push({ size: '', quantity: 0 });
-  }
+  // addSize() {
+  //   this.sizes.push({ size: '', quantity: 0 });
+  // }
 
   // Remove a size
-  removeSize(index: number) {
-    this.sizes.splice(index, 1);
-  }
+  // removeSize(index: number) {
+  //   this.sizes.splice(index, 1);
+  // }
   get stocks(): FormArray {
     return this.productForm.get('stocks') as FormArray;
   }
   addStock(): void {
-    const stockGroup = this.fb.group({
-      colorId: [null, Validators.required],
-      sizeId: [null, Validators.required],
-      quantity: [0, [Validators.required, Validators.min(1)]],
+    const stockGroup = new FormGroup({
+      colorid: new FormControl(),
+      sizes: new FormArray([
+        new FormGroup({
+          quantity: new FormControl(),
+          sizeid: new FormControl(),
+        }),
+      ]),
     });
     this.stocks.push(stockGroup);
   }
 
-  removeStock(index: number): void {
-    this.stocks.removeAt(index);
-  }
+  // removeStock(index: number): void {
+  //   this.stocks.removeAt(index);
+  // }
 
   onImageChange(event: any, index: number): void {
     const files: FileList = event.target.files;
@@ -512,18 +534,48 @@ export class ProductscrudComponent implements OnInit {
     this.productForm.get('price')?.setValue(data.priceBeforeDiscount);
     this.productForm.get('discount')?.setValue(data.discount);
     this.productForm.get('bestSeller')?.setValue(data.bestSeller);
-    this.productForm.get('subCategoryId')?.setValue(data.subCategoryId);
+    this.productForm.get('subcatId')?.setValue(data.subCategoryId);
     this.productForm.get('id')?.setValue(data.id);
     // Bind stocks
-    const stocksFormArray = this.fb.array(
-      data.sizesAndColorsQuantity.map((stock: any) =>
-        this.fb.group({
-          sizeId: [stock.sizeId, [Validators.required, Validators.min(1)]],
-          colorId: [stock.colorId, [Validators.required, Validators.min(1)]],
-          quantity: [stock.quantity, [Validators.required, Validators.min(0)]],
-        })
-      )
-    );
+   const stocksFormArray = this.fb.array(
+     data.sizesAndColorsQuantity.reduce((acc: any[], stock: any) => {
+       // Find if the colorId already exists
+       let existingStock = acc.find(
+         (item) => item.get('colorid')?.value === stock.colorId
+       );
+
+       if (!existingStock) {
+         // If not, create a new stock with sizes array
+         const newStockGroup = this.fb.group({
+           colorid: [stock.colorId, [Validators.required, Validators.min(1)]],
+           sizes: this.fb.array([
+             this.fb.group({
+               sizeid: [stock.sizeId, [Validators.required, Validators.min(1)]],
+               quantity: [
+                 stock.quantity,
+                 [Validators.required, Validators.min(0)],
+               ],
+             }),
+           ]),
+         });
+
+         acc.push(newStockGroup);
+       } else {
+         // If exists, push the size into the sizes array
+         (existingStock.get('sizes') as FormArray).push(
+           this.fb.group({
+             sizeid: [stock.sizeId, [Validators.required, Validators.min(1)]],
+             quantity: [
+               stock.quantity,
+               [Validators.required, Validators.min(0)],
+             ],
+           })
+         );
+       }
+
+       return acc;
+     }, [])
+   );
     this.productForm.setControl('stocks', stocksFormArray);
     this.bindimages(data.colorImages);
     // Bind images
@@ -538,21 +590,21 @@ export class ProductscrudComponent implements OnInit {
     this.cdr.detectChanges(); // Manually trigger change detection
   }
 
-  deleteImage(stock: number, image: number): void {
-    // Check if the stock index exists
-    if (this.productImages[stock]) {
-      // Remove the image at the specific index
-      this.productImages[stock].splice(image, 1);
+  // deleteImage(stock: number, image: number): void {
+  //   // Check if the stock index exists
+  //   if (this.productImages[stock]) {
+  //     // Remove the image at the specific index
+  //     this.productImages[stock].splice(image, 1);
 
-      // If no images are left for the stock, optionally remove the stock entry
-      if (this.productImages[stock].length === 0) {
-        this.productImages.splice(stock, 1);
-      }
+  //     // If no images are left for the stock, optionally remove the stock entry
+  //     if (this.productImages[stock].length === 0) {
+  //       this.productImages.splice(stock, 1);
+  //     }
 
-      // Trigger change detection by reassigning the array
-      this.productImages = [...this.productImages];
-    }
-  }
+  //     // Trigger change detection by reassigning the array
+  //     this.productImages = [...this.productImages];
+  //   }
+  // }
   getValidationMessage(controlName: string): string {
     const messages: { [key: string]: string } = {
       required: 'This field is required.',
@@ -576,5 +628,63 @@ export class ProductscrudComponent implements OnInit {
 
     // Return black or white based on luminance
     return luminance > 0.5 ? 'black' : 'white';
+  }
+  addSize(stockIndex: number) {
+    const sizeGroup = new FormGroup({
+      quantity: new FormControl(),
+      sizeid: new FormControl(),
+    });
+    this.getSizes(stockIndex).push(sizeGroup);
+  }
+
+  getSizes(stockIndex: number): FormArray {
+    return this.stocks.at(stockIndex).get('sizes') as FormArray;
+  }
+  removeStock(stockIndex: number) {
+    this.stocks.removeAt(stockIndex);
+  }
+  removeSize(stockIndex: number, sizeIndex: number) {
+    this.getSizes(stockIndex).removeAt(sizeIndex);
+  }
+  // onImageChange(event: Event, index: number): void {
+  //   const input = event.target as HTMLInputElement;
+  //   if (!input.files) return;
+
+  //   // Ensure the array is initialized for the given index
+  //   if (!this.imagesArray[index]) {
+  //     this.imagesArray[index] = [];
+  //   }
+
+  //   Array.from(input.files).forEach((file) => {
+  //     const reader = new FileReader();
+  //     reader.onload = () => {
+  //       if (reader.result) {
+  //         this.imagesArray[index].push(reader.result.toString());
+  //       }
+  //     };
+  //     reader.readAsDataURL(file);
+  //   });
+  // }
+
+  // Retrieve images for a specific index
+  getImages(index: number): string[] {
+    return this.productImages[index] || [];
+  }
+
+  // Delete an image
+  deleteImage(index: number, imageIndex: number): void {
+    this.productImages[index]?.splice(imageIndex, 1);
+  }
+
+  get formattedStocks() {
+    return this.stocks.value
+      .map((stock: any) => {
+        return stock.sizes.map((size: any) => ({
+          colorId: parseInt(stock.colorid, 10), // Map color ID from stock
+          sizeId: parseInt(size.sizeid, 10), // Map size ID from sizes
+          quantity: parseInt(size.quantity, 10), // Map quantity from sizes
+        }));
+      })
+      .flat(); // Flatten the array to match the Swagger structure
   }
 }
