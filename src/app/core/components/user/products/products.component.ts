@@ -41,7 +41,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         let id = 0;
 
         switch (snapid?.toLowerCase()) {
-          case 'men':
+          case 'men&women':
               id = 1;
               break;
           case 'women':
@@ -55,9 +55,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
               break;
           case 'contact':
               id = 5;
-              break;
-          case 'men&women':
-              id = 10;
               break;
           default:
               id = 0; 
