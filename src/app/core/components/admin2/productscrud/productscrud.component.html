@@ -393,12 +393,8 @@
         </div>
 
         <div class="col-md-12 mb-3">
-          <label for="subCategoryId" class="form-label">Subcategory</label>
-          <select
-            id="subCategoryId"
-            formControlName="subCategoryId"
-            class="form-select"
-          >
+          <label for="subcatId" class="form-label">Subcategory</label>
+          <select id="subcatId" formControlName="subcatId" class="form-select">
             <option
               *ngFor="let subCategory of subCategories"
               [value]="subCategory.subCategoryId"
@@ -424,138 +420,115 @@
           </div>
         </div>
       </div>
+<div formArrayName="stocks">
+  <!-- Color Selection -->
+ 
 
-      <!-- Color, Image, and Size Management -->
-      <div formArrayName="stocks">
-        <div
-          *ngFor="let stock of stocks.controls; let i = index"
-          [formGroupName]="i"
-          class="border rounded-3 p-3 mb-3 bg-light"
-        >
-          <h5 class="text-secondary">Color & Image {{ i + 1 }}</h5>
-          <div class="row g-3">
-            <div class="col-md-4">
-              <label for="color" class="form-label">Color</label>
-              <select id="color" formControlName="colorId" class="form-select">
-                <option
-                  *ngFor="let color of availableColors"
-                  [value]="color.id"
-                  [ngStyle]="{
-                    backgroundColor: color.colorCode,
-                    color: getContrastingTextColor(color.colorCode)
-                  }"
-                >
-                  {{ color.colorName }}
-                </option>
-              </select>
-
-              <div
-                *ngIf="
-                  productForm.get('colorId')?.invalid &&
-                  productForm.get('colorId')?.touched
-                "
-                class="text-danger"
-              >
-                <small *ngIf="stock.get('colorId')?.hasError('required')"
-                  >Color is required.</small
-                >
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <label for="size" class="form-label">Size</label>
-              <select id="size" formControlName="sizeId" class="form-select">
-                <option *ngFor="let size of availableSizes" [value]="size.id">
-                  {{ size.sizeName }}
-                </option>
-              </select>
-              <div
-                *ngIf="
-                  stock.get('sizeId')?.invalid && stock.get('sizeId')?.touched
-                "
-                class="text-danger"
-              >
-                <small *ngIf="stock.get('sizeId')?.hasError('required')"
-                  >Size is required.</small
-                >
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <label for="quantity" class="form-label">Quantity</label>
-              <input
-                id="quantity"
-                formControlName="quantity"
-                type="number"
-                class="form-control"
-              />
-              <div
-                *ngIf="
-                  stock.get('quantity')?.invalid &&
-                  stock.get('quantity')?.touched
-                "
-                class="text-danger"
-              >
-                <small *ngIf="stock.get('quantity')?.hasError('required')"
-                  >Quantity is required.</small
-                >
-                <small *ngIf="stock.get('quantity')?.hasError('min')"
-                  >Quantity must be a positive number.</small
-                >
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <label for="image" class="form-label">Images</label>
-              <input
-                type="file"
-                class="form-control"
-                (change)="onImageChange($event, i)"
-                multiple
-              />
-
-              <div
-                *ngIf="productImages[i] && productImages[i].length > 0"
-                class="image-grid mt-3"
-              >
-                <div
-                  class="image-item"
-                  *ngFor="let image of productImages[i]; let j = index"
-                >
-                  <img
-                    [src]="image"
-                    alt="Image Preview"
-                    class="img-thumbnail"
-                  />
-                  <button
-                    type="button"
-                    class="btn btn-danger btn-sm delete-button"
-                    (click)="deleteImage(i, j)"
-                  >
-                    X
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="text-end mt-3">
-            <button
-              type="button"
-              class="btn btn-outline-danger btn-sm"
-              (click)="removeStock(i)"
-            >
-              <i class="bi bi-trash"></i> Remove
-            </button>
-          </div>
+<div *ngFor="let stock of stocks.controls; let i = index" [formGroupName]="i" >
+  
+ <div class="row align-items-center">
+    <div class="col-md-6">
+      <label for="color-{{ i }}" class="form-label">Color</label>
+      <select id="color-{{ i }}" formControlName="colorid" class="form-select">
+        <option *ngFor="let color of availableColors" [value]="color.id">
+          {{ color.colorName }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-6 text-end">
+      <button
+        type="button"
+        class="btn btn-outline-danger btn-sm"
+        (click)="removeStock(i)"
+      >
+        Remove Color
+      </button>
+    </div>
+  </div>
+  <!-- Sizes for the selected color -->
+  <div formArrayName="sizes" class="mt-3">
+    <div *ngFor="let size of getSizes(i).controls; let j = index" [formGroupName]="j">
+      <div class="row align-items-center">
+        <div class="col-md-4">
+          <label for="size-{{ i }}-{{ j }}" class="form-label">Size</label>
+          <select id="size-{{ i }}-{{ j }}" formControlName="sizeid" class="form-select">
+            <option *ngFor="let size of availableSizes" [value]="size.id">
+              {{ size.sizeName }}
+            </option>
+          </select>
         </div>
+        <div class="col-md-4">
+          <label for="quantity-{{ i }}-{{ j }}" class="form-label">Quantity</label>
+          <input
+            id="quantity-{{ i }}-{{ j }}"
+            formControlName="quantity"
+            type="number"
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-2">
+          <button
+            type="button"
+            class="btn btn-outline-danger btn-sm"
+            (click)="removeSize(i, j)"
+          >
+            Remove Size
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-outline-primary btn-sm mt-2"
+      (click)="addSize(i)"
+    >
+      Add Size
+    </button>
+  </div>
+
+  <!-- Images for the selected color -->
+  <div class="mt-3">
+    <label for="images-{{ i }}" class="form-label">Images</label>
+    <input
+      id="images-{{ i }}"
+      type="file"
+      class="form-control"
+      (change)="onImageChange($event, i)"
+      multiple
+    />
+    <div class="image-grid mt-3" *ngIf="getImages(i).length">
+      <div
+        class="image-item d-inline-block me-2 mb-2 position-relative"
+        *ngFor="let image of getImages(i); let j = index"
+      >
+        <img
+          [src]="image"
+          alt="Image Preview"
+          class="img-thumbnail"
+          width="100"
+          height="100"
+        />
         <button
           type="button"
-          class="btn btn-outline-primary mt-2"
-          (click)="addStock()"
+          class="btn btn-danger btn-sm position-absolute top-0 end-0"
+          (click)="deleteImage(i, j)"
         >
-          <i class="bi bi-plus-circle"></i> Add Color & Size
+          X
         </button>
       </div>
+    </div>
+  </div>
+</div>
+</div>
+<button
+  type="button"
+  class="btn btn-outline-primary mt-3"
+  (click)="addStock()"
+>
+  Add Color
+</button>
+
 
       <!-- Submit Button -->
       <div class="mt-4 d-flex justify-content-end gap-3">

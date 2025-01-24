@@ -24,7 +24,6 @@ export class CatcrudComponent {
   newSubCategory: ISubCategory = {
     subCategoryId: 0,
     subCategoryName: '',
-    categoryId: 0,
   };
   searchText: string = '';
   currentPage: number = 1;
@@ -132,7 +131,6 @@ export class CatcrudComponent {
     this.newSubCategory = {
       subCategoryId: 0,
       subCategoryName: '',
-      categoryId: 0,
     };
     this.showModal = false; // Close the modal
   }

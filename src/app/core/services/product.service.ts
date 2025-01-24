@@ -33,7 +33,7 @@ export class ProductService {
 
   GetProductBySubCatId(id: number): Observable<IOperationResult> {
     return this._HttpClient.post<IOperationResult>(
-      `https://orca-app-sw4g7.ondigitalocean.app/api/Product/GetProductBySubCategory`,
+      `${environment.BaseURL}/api/Product/GetProductBySubCategory`,
       id
     );
   }
@@ -48,7 +48,7 @@ export class ProductService {
   
   createProduct(product: IProductadmin): Observable<IOperationResult> {
     return this._HttpClient.post<IOperationResult>(
-      `https://orca-app-sw4g7.ondigitalocean.app/api/Product/AddProduct`,
+      `${environment.BaseURL}/api/Product/AddProduct`,
       product
     );
   }
@@ -59,7 +59,7 @@ export class ProductService {
     id: number
   ): Observable<IOperationResult> {
     return this._HttpClient.post<IOperationResult>(
-      `https://orca-app-sw4g7.ondigitalocean.app/api/product/UpdateProduct?id=${id}`,
+      `${environment.BaseURL}/api/product/UpdateProduct?id=${id}`,
       product
     );
   }
@@ -68,26 +68,26 @@ export class ProductService {
   DeleteProduct(productId: number): Observable<IOperationResult> {
     console.log(productId);
     return this._HttpClient.post<IOperationResult>(
-      `https://orca-app-sw4g7.ondigitalocean.app/api/product/DeleteProduct`,
+      `${environment.BaseURL}/api/product/DeleteProduct`,
       productId
     );
   }
   GetAllColors(): Observable<{ success: boolean; data: IColor[] }> {
     return this._HttpClient.post<{ success: boolean; data: IColor[] }>(
-      `https://orca-app-sw4g7.ondigitalocean.app/api/Color/GetAllColors`,
+      `${environment.BaseURL}/api/Color/GetAllColors`,
       ' '
     );
   }
 
   GetAllSizes(): Observable<{ success: boolean; data: ISize[] }> {
     return this._HttpClient.post<{ success: boolean; data: ISize[] }>(
-      `https://orca-app-sw4g7.ondigitalocean.app/api/Size/GetAllSizes`,
+      `${environment.BaseURL}/api/Size/GetAllSizes`,
       ' '
     );
   }
   uploadImage(image: string[]): Observable<string> {
     return this._HttpClient.post<string>(
-      `https://orca-app-sw4g7.ondigitalocean.app/api/Product/uploadImage`,
+      `${environment.BaseURL}/api/Product/uploadImage`,
       JSON.stringify(image),
       {
         headers: new HttpHeaders({
