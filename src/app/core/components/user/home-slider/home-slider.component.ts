@@ -10,14 +10,14 @@ import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core
 })
 export class HomeSliderComponent implements OnInit, OnDestroy {
   slides = [
-    { imgUrl: 'assets/img/desk1.jpg' },
-    { imgUrl: 'assets/img/desk2.jpg' },
-    { imgUrl: 'assets/img/desk3.jpg' }
+    { imgUrl: 'assets/img/desk1.webp' },
+    { imgUrl: 'assets/img/desk2.webp' },
+    { imgUrl: 'assets/img/desk3.webp' }
     ];
     moblileslides = [
-      { imgUrl: 'assets/img/mob1.jpg' },
-      { imgUrl: 'assets/img/mob2.jpg' },
-      { imgUrl: 'assets/img/mob3.jpg' }
+      { imgUrl: 'assets/img/mob1.webp' },
+      { imgUrl: 'assets/img/mob2.webp' },
+      { imgUrl: 'assets/img/mob3.webp' }
     ];
     activearray = [{imgUrl:''}];
 
@@ -40,7 +40,7 @@ export class HomeSliderComponent implements OnInit, OnDestroy {
   autoSlide() {
     this.autoSlideInterval = setInterval(() => {
       this.nextSlide();
-    }, 3000); // Auto slide every 3 seconds
+    }, 3000);
   }
 
   nextSlide() {
