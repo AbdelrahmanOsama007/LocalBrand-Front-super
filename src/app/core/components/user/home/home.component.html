@@ -3,7 +3,7 @@
 <div class="cat-main-container">
     <div class="cat-sub-container">
         <div class="cat-flex-container">
-            <div class="cat-block" (click)="GetCategoryProducts('men&women')">
+            <div class="cat-block" (click)="GetCategoryProducts('men&women')" (touchend)="GetCategoryProducts('men&women')">
                 <img src="/assets/img/menandwomen.webp" alt="IMG-BANNER">
                 <div class="cat-block-txt">
                     <div>
@@ -12,7 +12,7 @@
                     <div class="cat-block-link">Shop Now</div>
                 </div>
             </div>                    
-            <div class="cat-block" (click)="GetCategoryProducts('accessories')">
+            <div class="cat-block" (click)="GetCategoryProducts('accessories')" (touchend)="GetCategoryProducts('accessories')">
                 <img src="/assets/img/accessories.webp" alt="IMG-BANNER">
                 <div class="cat-block-txt">
                     <div>
