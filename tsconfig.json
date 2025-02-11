@@ -17,10 +17,10 @@
     "experimentalDecorators": true,
     "moduleResolution": "bundler",
     "importHelpers": true,
-    "target": "ES2018",
-    "module": "ES2022",
+    "target": "ES5",
+    "module": "ES2015",
     "lib": [
-      "ES2022",
+      "ES5",
       "dom"
     ]
   },
