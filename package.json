@@ -23,6 +23,7 @@
     "@angular/platform-server": "^18.2.12",
     "@angular/router": "^18.2.12",
     "@angular/ssr": "^18.2.12",
+    "@babel/polyfill": "^7.12.1",
     "@cloudinary/ng": "^2.1.1",
     "@cloudinary/url-gen": "^1.21.0",
     "@emotion/is-prop-valid": "^1.2.2",

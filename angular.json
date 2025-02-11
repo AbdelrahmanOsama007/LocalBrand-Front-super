@@ -16,7 +16,7 @@
             "outputPath": "dist/local-brand",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": ["zone.js"],
+            "polyfills": ["zone.js", "core-js/stable", "regenerator-runtime/runtime"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/assets",
