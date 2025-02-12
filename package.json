@@ -58,6 +58,7 @@
     "sweetalert2": "^11.14.5",
     "swiper": "^11.1.14",
     "tslib": "^2.6.2",
+    "whatwg-fetch": "^3.6.20",
     "zone.js": "~0.14.10"
   },
   "devDependencies": {
